@@ -1,0 +1,112 @@
+.backs{
+	position: absolute;
+	@include whs(100%);
+	top: 0;left: 0;
+	background: #f7f7f8;
+}
+.logheader{
+	@include wh(100%,1rem);
+	background: #fff;
+	border-bottom: 1px solid #{$borcolor};
+	position: relative;
+	text-align: center;
+	line-height: 1rem;
+	font-size: .38rem;
+	color: #{$decolor};
+	.return{
+		@include whs(.5rem);
+		background-image: url(#{$backimg}logicon.png);
+		background-repeat: no-repeat;
+		background-size:.48rem .48rem;
+		position: absolute;
+		top:0;left: .25rem;
+		bottom: 0;margin: auto;
+
+	}
+}
+ul{
+	width: 100%;
+	background-color: #fff;
+	margin-top: 0.2rem;
+	padding: 0 0.25rem;
+	box-sizing: border-box;
+	border-top: 1px solid #{$borcolor};
+	border-bottom: 1px solid #{$borcolor};
+	li{
+		width: 100%;
+		height: 1.1rem;
+		border-bottom: 1px solid #{$borcolor};
+		line-height: 1.1rem;
+		font-size: .28rem;
+		position: relative;
+		color: #{$fontcolor};
+		&.yzm{
+         background:url(#{$backimg}yzm.png);
+         background-repeat: no-repeat;
+         background-size: 1.47rem .69rem;
+         background-position: 98% center;
+        }
+		&:last-child{
+			border-bottom:none;
+		}
+		span{
+    	 display: inline-block;
+		}
+		input[type="text"]{
+		  width:percentage(350/700);
+          height:90%;
+          font-size:.26rem;
+          box-sizing: border-box;
+          color:#{$fontcolor};
+          background: #fff;
+		}
+    input[type="password"]{
+      width:percentage(350/700);
+      height:90%;
+      font-size:.26rem;
+      box-sizing: border-box;
+      color:#{$fontcolor};
+      background: #fff;
+    }
+		input[type="button"]{
+          width:percentage(180/700);
+          height:.7rem;
+          background:#{$actcolor};
+          color: #fff;
+          border-radius: 0.5rem;
+          font-size: 0.28rem;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          margin: auto;
+        }
+    .imgyzm{
+      display: block;
+      width: 1.6rem;
+      position: absolute;
+      right: 0;top: 0;bottom: 0;
+      margin: auto;
+    }
+	}
+}
+    .user_login{
+      background: #406ff4;
+      width: 5.9rem;
+      height: .88rem;
+      border-radius: 1rem;
+      text-align: center;
+      line-height: .88rem;
+      color: #fff;
+      font-size: 0.32rem;
+      margin: .5rem auto;
+    }
+
+
+.userfont{
+  padding: 0.25rem;
+  box-sizing: border-box;
+  font-size: .28rem;
+  color: #62686f;
+  text-indent:2em;
+}
