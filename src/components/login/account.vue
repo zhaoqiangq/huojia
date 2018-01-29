@@ -21,8 +21,9 @@
   </div>
 </template>
 <script>
+  import qs from 'qs'
+  import http from '../../config/http'
   export default {
-    name: 'account',
     data () {
        return {
         LUserPhone:'',
@@ -32,30 +33,29 @@
     methods:{
       //登录
       Login(){
-        //验证登陆密码格式
-        this.$checkLPsd(this.LUserPsd);
-        // 验证登陆手机号格式
-        this.$checkLPhone(this.LUserPhone);
-
-
-//          if(this.checkLPhone() ==true && this.checkLPsd() == true && this.checkLpicma() == true){
-//              var that = this;
-//              $.ajax({
-//                  type:"POST",
-//                  url:this.HOST+"/user/logincheck",
-//                  data:{"loginmobileNo":this.LUserPhone,"loginpassword":this.LUserPsd},
-//                  dataType:"json",
-//                  success:function(data){
-//                      console.log(data);
-//                      if(data.resultflag == "F"){
-//                          $(".login_content1 span:eq(0)").removeClass("disappear");
-//                          $(".login_content1 span:eq(0)").text("手机号或密码错误。")
-//                      }else{
-//                         that.$router.push({path:"/brain-assetList1"})
-//                      }
-//                  }
-//              })
-//          }
+        if(this.$checkLPhone(this.LUserPhone) && this.$checkLPsd(this.LUserPsd) ){
+          http.post('/site/login',
+                qs.stringify({
+                   username:this.LUserPhone,
+                    password:this.LUserPsd,
+                }))
+               .then((res)=>{
+                  this.$local.save("shanbiao", {
+                  token: res.data.data.access_token
+                })
+               let redirect = this.$route.query.redirect
+               if(!redirect){
+                  redirect = 'app'
+               }
+                this.$router.push({
+                        path: '/'+redirect
+                })
+            })
+            .catch((error)=>{
+                 $('.tishi #tstext').text(error.response.data.message);
+                 $('.tishi').show().delay(1000).fadeOut();
+             })
+        }
       }
 
     }

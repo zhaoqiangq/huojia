@@ -81,6 +81,22 @@ ul{
           right: 0;
           margin: auto;
         }
+    .daojishi{
+          width:percentage(240/700);
+          height:.7rem;
+          background:#ccc;
+          line-height: .7rem;
+          text-align: center;
+          color: #fff;
+          border-radius: 0.5rem;
+          font-size: 0.28rem;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          margin: auto;
+          z-index: 2;
+      }
     .imgyzm{
       display: block;
       width: 1.6rem;
