@@ -78,7 +78,7 @@
               mobile:this.LUserPhone
             }))
             .then((res)=>{
-            console.log(res.data)
+            console.log(res.data.url)
           this.getCode();
         })
         .catch((error)=>{
@@ -98,8 +98,8 @@
                 validate:this.duanxingyz,
               }))
               .then((res)=>{
-                    console.log(res.data.token);
-                   this.$router.push('/newpassword');
+                console.log(res);
+                this.$router.push({path: '/newpassword',query: {token: res.data.data.token}})
              })
             .catch((error)=>{
               console.log(error)
@@ -118,8 +118,8 @@
           }
         })
         .then((res)=>{
-          this.imgcode = res.data.data
-          this.imgdatacode = res.data.data
+          this.imgcode = res.data.data.url
+          this.imgdatacode = res.data.data.url
         })
         .catch((error)=>{
              console.log(error)

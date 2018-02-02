@@ -11,11 +11,12 @@
 </template>
 
 <script>
-
+  import qs from 'qs'
+  import http from '../../config/http'
   export default {
     data(){
         return{
-            text:'' 
+            text:''
         }
     },
     methods: {
@@ -25,7 +26,13 @@
       },
     },
     created(){
-    
+      http.get('/site/reg-agreement')
+      .then((res)=>{
+            this.text = res.data.data;
+      })
+     .catch((error)=>{
+        console.log(error)
+     })
     }
   }
 </script>

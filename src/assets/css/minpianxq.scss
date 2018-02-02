@@ -112,21 +112,6 @@
     line-height: .5rem;
     position: relative;
     padding-bottom: .5rem;
-    &.active{
-      color: #ffaf30;
-      &:before{
-        position: absolute;
-        top:0.15rem;left: .16rem;
-        margin: auto;
-        content: "";
-        width: 0.5rem;
-        height: 0.5rem;
-        z-index: 8;
-        background: url(#{$backimg}yuanicon02.png)no-repeat;
-        background-size: .34rem .34rem;
-        background-position: center center;
-      }
-    }
     &.wg{
       color: #001026;
     }
@@ -148,6 +133,21 @@
       height: 0.16rem;
       background: url(#{$backimg}yuanicon01.png)no-repeat;
       background-size: cover;
+    }
+    &:first-child{
+      color: #ffaf30;
+      &:before{
+        position: absolute;
+        top:0.15rem;left: .16rem;
+        margin: auto;
+        content: "";
+        width: 0.5rem;
+        height: 0.5rem;
+        z-index: 8;
+        background: url(#{$backimg}yuanicon02.png)no-repeat;
+        background-size: .34rem .34rem;
+        background-position: center center;
+      }
     }
   }
 }

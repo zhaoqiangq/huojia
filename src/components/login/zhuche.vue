@@ -56,7 +56,7 @@
     },
     methods:{
      //验证码倒计时60秒
-     
+
       //后退
       backHandle(){
         this.$router.back();
@@ -142,8 +142,8 @@
           }
         })
         .then((res)=>{
-          this.imgcode = res.data.data
-          this.imgdatacode = res.data.data
+             this.imgcode = res.data.data.url
+            this.imgdatacode = res.data.data.url
         })
         .catch((error)=>{
             console.log(error)

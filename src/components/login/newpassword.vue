@@ -20,6 +20,8 @@
 </template>
 
 <script>
+  import qs from 'qs'
+  import http from '../../config/http'
 export default{
 	data(){
 		return {
@@ -34,8 +36,28 @@ export default{
       },
       Login(){
         //验证登陆密码格式
-        this.$checkLPsdTo(this.LUserPsdTo,this.LUserPsd);
-        this.$checkLPsd(this.LUserPsd);
+        if (this.$checkLPsd(this.LUserPsd) && this.$checkLPsdTo(this.LUserPsdTo,this.LUserPsd)){
+          http.post('/site/reset-password',
+            qs.stringify({
+              token:this.$route.query.token,
+              password:this.LUserPsd,
+              repassword:this.LUserPsdTo
+            }))
+            .then((res)=>{
+                let redirect = this.$route.query.redirect;
+                  if(!redirect){
+                     redirect = 'app'
+                  }
+                   this.$router.push({
+                       path: '/'+redirect
+                   })
+             })
+             .catch((error)=>{
+                 console.log(error)
+                 $('.tishi #tstext').text(error.response.data.message);
+                 $('.tishi').show().delay(1000).fadeOut();
+              })
+        }
       }
     },
 }

@@ -77,7 +77,7 @@
     vertical-align:middle;
   }
     input[type="text"]{
-    width:percentage(450/700);
+    width:percentage(600/700);
     height:90%;
     font-size:.26rem;
     padding-left:.3rem;
@@ -86,7 +86,7 @@
       background: #fff;
   }
   input[type="password"]{
-    width:percentage(450/700);
+    width:percentage(600/700);
     height:90%;
     font-size:.26rem;
     padding-left:.3rem;

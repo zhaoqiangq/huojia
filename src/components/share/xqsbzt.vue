@@ -5,49 +5,42 @@
         <span>商标状态</span>
       </div>
       <ul class="ztlist">
-        <li>
-          <span>预计3-5个月</span>
-          <p>商标注册申请注册公告）</p>
-        </li>
-        <li>
-          <span>预计3-5个月</span>
-          <p>商标注册申请等待驳回复审</p>
-        </li>
-        <li>
-          <span>预计3-5个月</span>
-          <p>商标注册申请等待驳回复审</p>
-        </li>
-        <li class="active">
-          <span>2017-11-24</span>
-          <p>商标注册申请中</p>
-        </li>
-        <li class="wg">
-          <span>2017-11-24</span>
-          <p>商标注册申请注册公告</p>
-        </li>
-        <li class="wg">
-          <span>2017-11-24</span>
-          <p>商标注册申请注册公告</p>
-        </li>
-        <li class="wg">
-          <span>2017-11-24</span>
-          <p>商标注册申请等待驳回通知发文</p>
-        </li>
-        <li class="wg">
-          <span>2017-11-24</span>
-          <p>商标注册申请中</p>
+        <li class="wg" v-for="item in ztlist">
+          <span>{{item.flowDate}}</span>
+          <p>{{item.flowName}}</p>
         </li>
       </ul>
     </div>
 </template>
 <script>
+  import http from '../../config/http'
   export default{
+    data(){
+      return{
+        ztlist:''
+      }
+    },
     methods:{
       //后退
       backHandle(){
         this.$router.back();
       },
     },
+    created(){
+      let mpid = this.$route.query.zch;
+      //默认获取验证码
+      http.get('/v1/biz/trademark/'+mpid+'',{
+          params:{
+            intCls:this.$route.query.sblb
+          }
+        })
+        .then((res)=>{
+              this.ztlist=res.data.data.flow;
+        })
+        .catch((error)=>{
+              console.log(error);
+         })
+    }
   }
 </script>
 <style lang="scss" scoped>

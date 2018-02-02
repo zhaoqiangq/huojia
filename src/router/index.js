@@ -39,6 +39,13 @@ let app = (resolve) => {
   })
 }
 
+//新手引导
+let guide = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/share/guide'))
+  })
+}
+
 
 //登录头部
 let register = (resolve) => {
@@ -149,6 +156,14 @@ let router = new Router({
         login:true
       },
       component:app
+    },
+    {
+      path: '/guide',
+      name:'guide',
+      meta: {
+        title: '新手引导',
+      },
+      component:guide
     },
     {
       path:'/register',

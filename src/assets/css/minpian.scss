@@ -46,7 +46,6 @@ ul.seachNav{
   }
 }
 ul.list1{
-    display: none;
     width: 100%;
     border-top: 1px solid #{$borcolor};
     padding: 0 .25rem;
@@ -98,7 +97,6 @@ ul.list1{
     }
 }
 ul.list2{
-  display: none;
   width: 100%;
   padding: 0 0.25rem;
   border-top: 1px solid #{$borcolor};
@@ -112,9 +110,15 @@ ul.list2{
     &:nth-child(2n){
       float: right;
     }
-    img{
+    .img{
       width: 100%;
+      height: 2.3rem;
+      overflow: hidden;
+      img{
+        width: 100%;
+      }
     }
+
     p{
       font-size: .28rem;
       color: #001026;
@@ -160,9 +164,15 @@ ul.list3{
     &:nth-child(3n+1){
       margin-left: 0;
     }
-    img{
+    .img{
       width: 100%;
+      height: 1.6rem;
+      overflow: hidden;
+      img{
+        width: 100%;
+      }
     }
+
     p{
       font-size: .28rem;
       color: #001026;
@@ -278,6 +288,9 @@ ul.seachNav{
     width: 100%;
     padding-bottom: 0.3rem;
     @include clear;
+    &.bottom{
+      margin-bottom: 1.5rem;
+    }
     li{
       width: percentage(210/700);
       height: .8rem;
@@ -373,6 +386,7 @@ ul.seachNav{
 
 //筛选商标类别
 .sbliebie,.fuwu{
+  overflow: auto;
   position: fixed;
   top:0;bottom: 0;
   left: 0;right: 0;
@@ -413,6 +427,7 @@ ul.seachNav{
     position: fixed;
     left: 0;bottom: 0;
     margin: auto;
+    background: #fff;
     input{
       width: percentage(270/600);
       height: .8rem;
@@ -420,7 +435,7 @@ ul.seachNav{
       font-size: .28rem;
       border-radius: 1rem;
     }
-    input[type="button"]{
+    input[type="submit"]{
       background: #406ff4;
       color: #fff;
     }
@@ -437,6 +452,7 @@ ul.seachNav{
     padding: 0;
   }
   .cheboxlist{
+    margin-bottom: 1.5rem;
     li{
       margin: 0;
       height: .9rem;

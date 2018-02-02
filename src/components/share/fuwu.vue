@@ -7,25 +7,14 @@
       <div class="checkbox">
         <form>
         <ul class="cheboxlist">
-          <li>
+          <li v-for="item in smalltype">
             <input type="checkbox">
-            <label for="">0101 工业气体，单质</label>
+            <label for="">{{item.goodsName}}</label>
           </li>
-          <li>
-            <input type="checkbox">
-            <label for="">0101 工业气体，单质</label>
-          </li>
-          <li>
-            <input type="checkbox">
-            <label for="">0101 工业气体，单质</label>
-          </li>
-          <li>
-            <input type="checkbox">
-            <label for="">0101 工业气体，单质</label>
-          </li>
+
         </ul>
         <div class="btn">
-          <input type="button" value="确定">
+          <input type="submit" value="确定">
           <input type="reset">
         </div>
         </form>
@@ -35,6 +24,7 @@
 </template>
 <script>
   export default {
+    props:['smalltype'],
     data () {
       return {
 

@@ -6,23 +6,14 @@
     </div>
     <div class="checkbox">
       <form>
-        <ul class="cheboxlist">
-          <li>
+        <ul class="cheboxlist bottom">
+          <li v-for="item in sblblist">
             <input type="checkbox">
-            <label for="">01类化学原料</label>
+            <label for="">{{item.cls_id}}{{item.cls_name}}</label>
           </li>
-          <li>
-            <input type="checkbox">
-            <label for="">01类化学原料</label>
-          </li>
-          <li>
-            <input type="checkbox">
-            <label for="">01类化学原料</label>
-          </li>
-
         </ul>
         <div class="btn">
-          <input type="button" value="确定">
+          <input type="submit" value="确定">
           <input type="reset">
         </div>
       </form>
@@ -31,7 +22,9 @@
   </div>
 </template>
 <script>
+
   export default {
+    props:['sblblist'],
     data () {
       return {
 

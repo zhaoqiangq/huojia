@@ -6,31 +6,31 @@
           <li @click="showsbliebie">商标类别</li>
           <li @click="showfuwu">服务类目</li>
         </ul>
-        <form>
+        <form >
         <div class="checkbox">
            <p>快速选择</p>
             <ul class="cheboxlist">
               <li>
-                <input type="checkbox"/>
-                <label for="">0-5000</label>
+                <input type="checkbox" value="0-5000" v-model="checkedNames"/>
+                <label for="0-5000">0-5000</label>
               </li>
               <li>
-                <input type="checkbox"/>
-                <label for="">5000-10000</label>
+                <input type="checkbox" value="5000-10000" v-model="checkedNames"/>
+                <label for="5000-10000">5000-10000</label>
               </li>
               <li>
-                <input type="checkbox"/>
-                <label for="">10000以上</label>
+                <input type="checkbox" value="10000" v-model="checkedNames"/>
+                <label for="10000">10000以上</label>
               </li>
             </ul>
         </div>
         <div class="mnumber">
           <p>价格区间(自定义)</p>
-          <input type="number"><span class="gan"></span> <input type="number">
+          <input type="number" v-model="mininputnumber"><span class="gan"></span> <input type="number" v-model="maxinputnumber">
         </div>
         <div class="buts">
-              <input type="button" value="确定">
-              <input type="reset" value="重置">
+              <input type="button" value="确定" @click="doSubmit">
+              <input type="reset" value="重置" @click="doreset">
         </div>
         </form>
       </div>
@@ -39,10 +39,11 @@
 </template>
 <script>
   export default {
-    name: 'sblist',
     data () {
       return {
-
+        checkedNames:[],
+        mininputnumber:'',
+        maxinputnumber:''
       }
     },
     methods:{
@@ -54,6 +55,34 @@
       },
       showfuwu:function () {
         this.$emit('showfuwu')
+      },
+      minnumber:function () {
+        return Math.min.apply(Math,this.checkedNames.toString().split('-').toString().split(',').map(s => +s))
+      },
+      maxnumber:function () {
+        return Math.max.apply(Math,this.checkedNames.toString().split('-').toString().split(',').map(s => +s))
+      },
+      doSubmit:function () {
+        if (this.mininputnumber){
+          this.checkedNames.push(this.mininputnumber);
+        }
+        if (this.maxinputnumber){
+          this.checkedNames.push(this.maxinputnumber);
+        }
+        let data = {
+          min : this.minnumber(),
+          max : this.maxnumber()
+        }
+        this.$emit('parjiage',data)
+        this.$emit('hidejiage')
+        this.checkedNames =[];
+        this.mininputnumber ='';
+        this.maxinputnumber ='';
+      },
+      doreset:function () {
+        this.checkedNames =[];
+        this.mininputnumber ='';
+        this.maxinputnumber ='';
       }
     }
   }

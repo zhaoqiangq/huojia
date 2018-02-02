@@ -5,48 +5,55 @@
           <span>商标详情</span>
       </div>
       <div class="xzimg">
-        <img src="../../assets/images/img.jpg" alt="">
-        <span>Kederme 科德美</span>
+        <img v-bind:src="details.tm_img" alt="">
+        <span>{{details.tm_name}}</span>
       </div>
       <ul class="xqlist">
         <li>
           <span>类别：</span>
-          25类-服装鞋帽
+          {{details.tm_bigtype_name}}
         </li>
-        <router-link to="/xqsbzt" tag="li" class="sbzt">
+        <router-link tag="li" class="sbzt" :to='{path:"/xqsbzt",query:{sblb:intCls,zch:zch}}'>
           <span>当前状态：</span>
-          商标注册申请注册公告
+          {{details.current_status}}
         </router-link>
         <li>
           <span>注册号：</span>
-          123456789
+          {{details.reg_num}}
         </li>
         <li>
           <span>申请时间：</span>
-          2014-04-11
+          {{details.apply_time}}
         </li>
         <li>
           <span>申请人：</span>
-         河北洁仕宝日用塑料制品有限公司
+         {{details.apply_name}}
         </li>
         <li>
           <span>使用期限：</span>
-          2015-09-07至2025-09-06
+          {{details.use_period}}
         </li>
       </ul>
       <ul class="lxqlist">
-        <router-link to="/xqfwlist" tag="li" class="link"><span>商标服务列表</span></router-link>
-        <router-link to="/xqsqrlist" tag="li" class="link"><span>申请人信息</span></router-link>
-        <li><span>代理公司</span><span class="right">上海尚标互联网科技有限公司</span></li>
+        <router-link tag="li" class="link" :to='{path:"/xqfwlist",query:{sblb:intCls,zch:zch}}'>
+          <span>商标服务列表</span>
+        </router-link>
+        <router-link tag="li" class="link" :to='{path:"/xqsqrlist",query:{sblb:intCls,zch:zch}}'>
+          <span>申请人信息</span>
+        </router-link>
+        <li><span>代理公司</span><span class="right">{{details.agent}}</span></li>
       </ul>
   </div>
 </template>
 <script>
+  import http from '../../config/http'
   export default {
     name: 'sbdetails',
     data () {
       return {
-
+        details:'',
+        zch:this.$route.query.zch,
+        intCls:this.$route.query.sblb
       }
     },
     methods:{
@@ -55,6 +62,21 @@
         this.$router.back();
       },
     },
+    created(){
+      let mpid = this.$route.query.zch;
+      //默认获取验证码
+      http.get('/v1/biz/trademark/'+mpid+'',{
+          params:{
+            intCls:this.$route.query.sblb
+          }
+        })
+        .then((res)=>{
+             this.details=res.data.data;
+        })
+        .catch((error)=>{
+              console.log(error);
+        })
+    }
   }
 </script>
 <style lang="scss" scoped>
