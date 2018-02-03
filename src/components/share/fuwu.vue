@@ -8,18 +8,16 @@
         <form>
         <ul class="cheboxlist">
           <li v-for="item in smalltype">
-            <input type="checkbox">
-            <label for="">{{item.goodsName}}</label>
+            <input type="checkbox" :value="item.goods_id"  v-model="checkedNames">
+            <label :for="item.goods_id">{{item.goods_name}}</label>
           </li>
-
         </ul>
         <div class="btn">
-          <input type="submit" value="确定">
-          <input type="reset">
+          <input type="button" value="确定" @click="doSubmit" >
+          <input type="reset" @click="doreset">
         </div>
         </form>
       </div>
-
   </div>
 </template>
 <script>
@@ -27,12 +25,20 @@
     props:['smalltype'],
     data () {
       return {
-
+        checkedNames:[],
       }
     },
     methods:{
       hidefuwu: function () {
         this.$emit('hidefuwu')
+      },
+      doreset:function () {
+        this.checkedNames = []
+      },
+      doSubmit:function () {
+        this.$emit('parfwlist',this.checkedNames.toString());
+        this.$emit('hidefuwu')
+        this.checkedNames =[];
       }
     }
   }

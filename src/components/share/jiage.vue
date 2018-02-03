@@ -19,8 +19,8 @@
                 <label for="5000-10000">5000-10000</label>
               </li>
               <li>
-                <input type="checkbox" value="10000" v-model="checkedNames"/>
-                <label for="10000">10000以上</label>
+                <input type="checkbox" value="10000-10000000" v-model="checkedNames"/>
+                <label for="10000-10000000">10000以上</label>
               </li>
             </ul>
         </div>

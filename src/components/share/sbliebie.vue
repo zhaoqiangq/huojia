@@ -8,13 +8,13 @@
       <form>
         <ul class="cheboxlist bottom">
           <li v-for="item in sblblist">
-            <input type="checkbox">
-            <label for="">{{item.cls_id}}{{item.cls_name}}</label>
+            <input type="checkbox" :value="item.tm_bigtype" v-model="checkedNames">
+            <label :for="item.tm_bigtype">{{item.tm_bigtype}}{{item.tm_bigtype_name}}</label>
           </li>
         </ul>
         <div class="btn">
-          <input type="submit" value="确定">
-          <input type="reset">
+          <input type="button" value="确定" @click="doSubmit">
+          <input type="reset" @click="doreset">
         </div>
       </form>
     </div>
@@ -27,12 +27,20 @@
     props:['sblblist'],
     data () {
       return {
-
+        checkedNames:[],
       }
     },
     methods:{
       hidesbliebie: function () {
         this.$emit('hidesbliebie')
+      },
+      doreset:function () {
+        this.checkedNames =[];
+      },
+      doSubmit:function () {
+        this.$emit('parsblblist',this.checkedNames.toString());
+        this.$emit('hidesbliebie')
+        this.checkedNames =[];
       }
     }
   }

@@ -1,9 +1,9 @@
 <template>
   <div>
       <div class="mphader">
-          <h6>{{username}}</h6>
-        <img :src="namecarddetail.cover" alt="">
-        <span>{{namecarddetail.name}}</span>
+          <h6>{{namecarddetail.realname}}</h6>
+        <img :src="namecarddetail.user_avatar" alt="">
+        <span>{{namecarddetail.card_name}}</span>
       </div>
       <ul class="seachNav">
         <li @click="jiage = !jiage">价格</li>
@@ -11,8 +11,8 @@
         <li @click="fuwu = !fuwu">服务类目</li>
       </ul>
       <jiage v-show="jiage" v-on:parjiage="parjiage" v-on:hidejiage="hidejiage" v-on:showsbliebie="showsbliebie" v-on:showfuwu="showfuwu"></jiage>
-      <sbliebie v-show="sbliebie" v-on:hidesbliebie="hidesbliebie" :sblblist="sblblist"></sbliebie>
-      <fuwu v-show="fuwu" v-on:hidefuwu="hidefuwu" :smalltype="smalltype"></fuwu>
+      <sbliebie v-show="sbliebie" v-on:parsblblist="parsblblists" v-on:hidesbliebie="hidesbliebie" :sblblist="sblblist"></sbliebie>
+      <fuwu v-show="fuwu" v-on:hidefuwu="hidefuwu"  v-on:parfwlist="parfwlists" :smalltype="smalltype"></fuwu>
       <ul class="list1" v-if="ysid==1">
         <router-link tag="li" v-for="item,index in sblist" :key="index" :to="{path:'/sbdetails',query:{sblb:item.tm_bigtype,zch:item.reg_num}}">
            <div class="img">
@@ -21,7 +21,7 @@
            <div class="msg">
               <h6>{{item.tm_name}}</h6>
               <p>商标类别：{{item.tm_bigtype}}  注册号：{{item.reg_num}}</p>
-              <p><span>申请人：{{item.apply_name}}</span> <img :src="item.is_auth"  alt=""></p>
+              <p><span>申请人：{{item.apply_name}}</span> <img :src="item.auth_img"  alt=""></p>
               <p>商标状态：{{item.current_status}}</p>
               <p>售价：<i>￥{{parseInt(item.price)}}</i></p>
            </div>
@@ -31,14 +31,14 @@
         <router-link tag="li" v-for="item,index in sblist" :key="index" :to="{path:'/sbdetails',query:{sblb:item.tm_bigtype,zch:item.reg_num}}">
         <div class="img"><img v-bind:src="item.tm_img" alt=""></div>
           <p><span class="gsname">{{item.apply_name}}</span> <img :src="item.is_auth" alt=""></p>
-          <p><span class="leibei">{{item.tm_bigtype}}{{item.bigtypename}}</span><i>￥{{parseInt(item.price)}}</i></p>
+          <p><span class="leibei">{{item.tm_bigtype}}{{item.tm_bigtype_name}}</span><i>￥{{parseInt(item.price)}}</i></p>
         </router-link>
       </ul>
       <ul class="list3" v-if="ysid==3">
         <router-link tag="li" v-for="item,index in sblist" :key="index"  :to="{path:'/sbdetails',query:{sblb:item.tm_bigtype,zch:item.reg_num}}">
           <div class="img"><img v-bind:src="item.tm_img" alt=""></div>
           <p><span class="gsname">{{item.apply_name}}</span> <img :src="item.is_auth"  alt=""></p>
-          <p><span class="leibei">{{item.tm_bigtype}}{{item.bigtypename}}</span></p>
+          <p><span class="leibei">{{item.tm_bigtype}}{{item.tm_bigtype_name}}</span></p>
           <i>￥{{parseInt(item.price)}}</i>
         </router-link>
       </ul>
@@ -70,7 +70,6 @@
           sblist:'',
           ysid:'',
           smalltype:'',
-          username:'',
           namecarddetail:'',
           parminjiage:'',
           parmaxjiage:'',
@@ -104,17 +103,18 @@
         this.jiage = false;
       },
       https:function () {
-            http.get('v1/brand/trademark-tm-auth/'+this.mpid+'',{
+            http.get('v1/biz/name-card',{
                 params:{
+                     id:this.mpid,
                      page:this.pages,
                      minPrice:this.parminjiage,
                      maxPrice:this.parmaxjiage,
-                     bigType: this.parsblblist,
-                     type:this.parfwlist
+                     bigtype: this.parsblblist,
+                     goods:this.parfwlist
                 }
              })
             .then((res)=>{
-              this.sblist = res.data.data.namecard;
+              this.sblist = res.data.data.trademarks.data;
             })
             .catch((error)=>{
                 console.log(error)
@@ -124,22 +124,48 @@
         this.parminjiage = data.min;
         this.parmaxjiage = data.max;
         this.https();
+      },
+      parsblblists:function (data) {
+        this.parsblblist = data;
+        this.https();
+        http.get('v1/biz/goods',{
+            params:{
+              tm_bigtype:data
+            }
+          })
+          .then((res)=>{
+            this.smalltype = res.data.data;
+          })
+          .catch((error)=>{
+             console.log(error)
+          })
+      },
+      parfwlists:function (data) {
+        this.parfwlist = data;
+        this.https();
       }
     },
     created(){
-      http.get('v1/brand/trademark-tm-auth/'+this.mpid+'',{
+      //获取服务类别
+        http.get('v1/biz/goods/search?type=hot')
+        .then((res)=>{
+          this.smalltype = res.data.data
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+
+      http.get('v1/biz/name-card',{
           params:{
+            id:this.mpid,
             page:this.pages,
           }
       })
         .then((res)=>{
             this.sblblist = res.data.data.bigtype;
-            this.sblist = res.data.data.namecard;
-            this.ysid =  res.data.data.nc_template_id;
-            this.smalltype = res.data.data.smalltype;
-            this.username = res.data.data.username;
-            this.namecarddetail = res.data.data.namecarddetail;
-            console.log(res)
+            this.sblist = res.data.data.trademarks.data;
+            this.ysid =  res.data.data.namecard.nc_template_id;
+            this.namecarddetail = res.data.data.namecard;
         })
         .catch((error)=>{
             console.log(error)
