@@ -40,9 +40,7 @@
                     password:this.LUserPsd,
                 }))
                .then((res)=>{
-                  this.$local.save("shanbiao", {
-                  token: res.data.data.access_token
-                })
+                this.$local.save("shanbiao",res.data.data.access_token)
                let redirect = this.$route.query.redirect
                if(!redirect){
                   redirect = 'app'

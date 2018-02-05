@@ -126,3 +126,13 @@ ul{
   color: #62686f;
   text-indent:2em;
 }
+
+
+.null404{
+  position: absolute;
+  top:0;left: 0;right: 0;bottom: 0;
+  margin: auto;
+  background: url(#{$backimg}404.png) no-repeat;
+  background-position: center center;
+  background-size: 3.27rem 3.03rem;
+}

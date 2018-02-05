@@ -93,15 +93,11 @@
             }))
             .then((res)=>{
               console.log(res);
-              this.$local.save("shanbiao", {
-                  token: res.data.data.access_token
-              })
+              this.$local.save("shanbiao",res.data.data.access_token)
               let redirect = this.$route.query.redirect
-
               if(!redirect){
                 redirect = 'app'
               }
-
               this.$router.push({
                 path: '/'+redirect
               })
@@ -111,6 +107,24 @@
               $('.tishi #tstext').text(error.response.data.message);
               $('.tishi').show().delay(1000).fadeOut();
             })
+
+          http.post('/site/devicelog',
+            qs.stringify({
+              action:'fastlogin',
+              type:3,
+              device_id:1111,
+              device_name:'weixin',
+              device_version:'232131',
+              token:'',
+              from_page:'baidu.com',
+              to_page:'login'
+            }))
+            .then((res)=>{
+                console.log(res);
+           })
+           .catch((error)=>{
+                console.log(error)
+           })
         }
       }
     },
@@ -128,6 +142,7 @@
         .catch((error)=>{
             console.log(error)
         })
+//        this.$buryData('fastlogin','form','to')
     }
   }
 </script>

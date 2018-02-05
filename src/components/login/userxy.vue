@@ -28,7 +28,7 @@
     created(){
       http.get('/site/reg-agreement')
       .then((res)=>{
-            this.text = res.data.data;
+            this.text = res.data.data.reg_content;
       })
      .catch((error)=>{
         console.log(error)

@@ -5,14 +5,15 @@ import App from './App'
 import router from './router'
 import '@/assets/css/base'
 import Utils from '@/lib/utils'
-// import http from '@/config/http'
 import 'jquery'
 import "babel-polyfill"
+import VueScroller from 'vue-scroller'
 // import Axios from 'axios'
 // import VueAxios from 'vue-axios'
 // Vue.use(VueAxios,Axios)
 
 Vue.use(Utils)
+Vue.use(VueScroller);
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

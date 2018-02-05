@@ -29,6 +29,7 @@ ul.seachNav{
   height: .95rem;
   @include clear;
   position: relative;
+  border-bottom: 1px solid #{$borcolor};
   li{
     width: 33.33%;
     height: 100%;
@@ -47,10 +48,8 @@ ul.seachNav{
 }
 ul.list1{
     width: 100%;
-    border-top: 1px solid #{$borcolor};
     padding: 0 .25rem;
     box-sizing: border-box;
-    margin-bottom: 1.1rem;
     li{
       width: 100%;
       padding: .25rem 0;
@@ -99,10 +98,8 @@ ul.list1{
 ul.list2{
   width: 100%;
   padding: 0 0.25rem;
-  border-top: 1px solid #{$borcolor};
   box-sizing: border-box;
   @include clear;
-  margin-bottom: 1.1rem;
   li{
     width: percentage(330/700);
     margin-top: 0.25rem;
@@ -152,10 +149,8 @@ ul.list2{
 ul.list3{
   width: 100%;
   padding: 0 0.25rem;
-  border-top: 1px solid #{$borcolor};
   box-sizing: border-box;
   @include clear;
-  margin-bottom: 1.1rem;
   li{
     width: percentage(215/700);
     margin-top: .25rem;
@@ -447,43 +442,45 @@ ul.seachNav{
   }
 }
 //筛选服务类别
-.fuwu{
-  .checkbox{
+.fuwu {
+  .checkbox {
     padding: 0;
   }
-  .cheboxlist{
+  .cheboxlist {
     margin-bottom: 1.5rem;
-    li{
+    li {
       margin: 0;
       height: .9rem;
       width: 100%;
       float: none;
-      &:nth-child(3n){
+      &:nth-child(3n) {
         float: none;
       }
-      &:nth-child(3n+2){
+      &:nth-child(3n+2) {
         margin-left: 0;
       }
       border-bottom: 1px solid #{$borcolor};
-      label{
+      label {
         display: block;
         width: 100%;
         height: 100%;
         border-radius: 0.05rem;
-        border:none;
+        border: none;
         line-height: .9rem;
         padding-left: .25rem;
         box-sizing: border-box;
         text-align: left;
         color: #62686f;
       }
-      input[type="checkbox"]:checked + label{
+      input[type="checkbox"]:checked + label {
         color: #62686f;
         border: none;
-        background: url(#{$backimg}chebox.png)no-repeat;
+        background: url(#{$backimg}chebox.png) no-repeat;
         background-position: 95% center;
         background-size: 0.34rem 0.34rem;
       }
     }
   }
 }
+
+

@@ -94,6 +94,13 @@ let userxy = (resolve) => {
   })
 }
 
+//404
+let null404 = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/login/null404'))
+  })
+}
+
 Vue.use(Router)
 
 let router = new Router({
@@ -108,7 +115,7 @@ let router = new Router({
   },
   routes: [
     {
-      path: '/',
+      path: '/shareCard',
       name: 'sbList',
       meta: {
         title: '分享商标列表'
@@ -201,8 +208,14 @@ let router = new Router({
         title: '用户服务协议'
       },
       component:userxy
+    },
+    {
+      path:'*',
+      meta: {
+        title: '404'
+      },
+      component:null404
     }
-
   ]
 })
 

@@ -13,10 +13,8 @@ export default {
             $('.tishi').show().delay(1000).fadeOut();
     	}
       };
-
-
- 	// 失焦验证图和密码
-	vm.prototype.$checkLpicma = (picLyanzhengma) =>{
+    	// 失焦验证图和密码
+	    vm.prototype.$checkLpicma = (picLyanzhengma) =>{
           if(picLyanzhengma == '') {
             $('.tishi #tstext').text('请输入验证码');
             $('.tishi').show().delay(1000).fadeOut();
@@ -29,21 +27,20 @@ export default {
               return true;
           }
 	}
-
-	//验证登陆密码格式
-	vm.prototype.$checkLPsd = (LUserPsd) =>{
-			 if(LUserPsd == ''){
-         $('.tishi #tstext').text('请输入密码');
-         $('.tishi').show().delay(1000).fadeOut();
+    	//验证登陆密码格式
+    	vm.prototype.$checkLPsd = (LUserPsd) =>{
+			   if(LUserPsd == ''){
+             $('.tishi #tstext').text('请输入密码');
+            $('.tishi').show().delay(1000).fadeOut();
           }else if(LUserPsd.search(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/) == 0){
               return true;
           }else{
              $('.tishi #tstext').text('密码必须6-20位，包含字母与数字');
              $('.tishi').show().delay(1000).fadeOut();
           }
-	}
-	//二次验证密码
-	vm.prototype.$checkLPsdTo = (LUserPsdTo,LUserPsd) =>{
+	    }
+	   //二次验证密码
+	   vm.prototype.$checkLPsdTo = (LUserPsdTo,LUserPsd) =>{
 		  if(LUserPsd == ''){
               $('.tishi #tstext').text('请输入密码');
               $('.tishi').show().delay(1000).fadeOut();
@@ -57,8 +54,7 @@ export default {
               $('.tishi').show().delay(1000).fadeOut();
           }
 	    }
-
-
+     //local storage
      let local = {
        save (key, value) {
          localStorage.setItem(key, JSON.stringify(value))
@@ -68,6 +64,60 @@ export default {
        }
      }
      vm.prototype.$local = local
+
+     //埋点
+     //生成uuid
+     function guid() {
+         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+             var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+             return v.toString(16);
+          });
+      }
+     //获取手机的唯一识别数
+      var sbuuid;
+      //设置localStorage
+      if (!window.localStorage.getItem('sbuuid')){
+        window.localStorage.setItem('sbuuid',guid());
+      }
+      sbuuid =  window.localStorage.getItem('sbuuid')
+
+      //获取token
+      var token;
+      if (window.localStorage.getItem('shanbiao')){
+        token = window.localStorage.getItem('shanbiao')
+      }
+
+      //获取手机型号和系统
+     var iponeModel;
+     var u = navigator.userAgent;
+     if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {
+       //安卓手机
+        iponeModel='Android'
+     } else if (u.indexOf('iPhone') > -1) {
+       //苹果手机
+       iponeModel = 'ios'
+     } else if (u.indexOf('Windows Phone') > -1) {
+       //winphone手机
+       iponeModel = 'winphone'
+     }
+       //设备版本
+       var device_version = window.navigator.appVersion;
+
+
+       vm.prototype.$buryData = (behavior,fromPage,toPage) => {
+         $.post("http://apicet.shsbip.com/api/site/devicelog",{
+           action:behavior,
+           type:'3',
+           device_id:sbuuid,
+           device_name:iponeModel,
+           device_version:device_version,
+           token:token,
+           from_page:fromPage,
+           to_page:toPage,
+         },function(res){
+            console.log(res);
+         });
+       }
 
    }
 }
