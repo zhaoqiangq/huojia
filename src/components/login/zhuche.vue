@@ -123,6 +123,7 @@
               this.$router.push({
                 path: '/'+redirect
               })
+              this.$buryData('userreg','注册用户','');
             })
             .catch((error)=>{
               console.log(error)

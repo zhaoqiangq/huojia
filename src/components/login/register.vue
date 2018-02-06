@@ -23,7 +23,7 @@
     methods:{
       //后退
       backHandle(){
-        this.$router.back();
+        this.$router.push('/shareCard');
       },
     },
   }

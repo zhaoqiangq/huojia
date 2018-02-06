@@ -17,10 +17,7 @@
         <li @click="sbliebie = !sbliebie">商标类别</li>
         <li @click="fuwu = !fuwu">服务类目</li>
       </ul>
-      <jiage v-show="jiage" v-on:parjiage="parjiage" v-on:hidejiage="hidejiage" v-on:showsbliebie="showsbliebie" v-on:showfuwu="showfuwu"></jiage>
-      <sbliebie v-show="sbliebie" v-on:parsblblist="parsblblists" v-on:hidesbliebie="hidesbliebie" :sblblist="sblblist"></sbliebie>
-      <fuwu v-show="fuwu" v-on:hidefuwu="hidefuwu"  v-on:parfwlist="parfwlists" :smalltype="smalltype"></fuwu>
-            <ul class="list1" v-if="ysid==1">
+      <ul class="list1" v-if="ysid==1">
         <router-link tag="li" v-for="item,index in sblist" :key="index" :to="{path:'/sbdetails',query:{sblb:item.tm_bigtype,zch:item.reg_num}}">
            <div class="img">
               <img v-bind:src="item.tm_img" alt="">
@@ -80,8 +77,11 @@
         </router-link>
       </ul>
        </scroller>
+    <jiage v-show="jiage" v-on:parjiage="parjiage" v-on:hidejiage="hidejiage" v-on:showsbliebie="showsbliebie" v-on:showfuwu="showfuwu"></jiage>
+    <sbliebie v-show="sbliebie" v-on:parsblblist="parsblblists" v-on:hidesbliebie="hidesbliebie" :sblblist="sblblist"></sbliebie>
+    <fuwu v-show="fuwu" v-on:hidefuwu="hidefuwu"  v-on:parfwlist="parfwlists" :smalltype="smalltype"></fuwu>
     <ul class="buttomNav">
-        <router-link to="/app" tag="li" >
+        <router-link to="/app" tag="li">
           <img src="../../assets/images/buicon01.png" alt="">收藏
         </router-link>
         <router-link to="/app" tag="li">
@@ -146,8 +146,8 @@
       https:function () {
             http.get('v1/biz/name-card',{
                 params:{
-                     id:this.mpid,
-                     page:this.pages,
+                    id:this.mpid,
+                     page:1,
                      minPrice:this.parminjiage,
                      maxPrice:this.parmaxjiage,
                      bigtype: this.parsblblist,
@@ -155,6 +155,8 @@
                 }
              })
             .then((res)=>{
+              this.jiazailist = [];
+              this.pages = 1;
               this.sblist = res.data.data.trademarks.data;
             })
             .catch((error)=>{
@@ -162,11 +164,14 @@
             })
       },
       parjiage:function (data) {
+        this.parminjiage = '';
+        this.parmaxjiage = '';
         this.parminjiage = data.min;
         this.parmaxjiage = data.max;
         this.https();
       },
       parsblblists:function (data) {
+        this.parsblblist = '';
         this.parsblblist = data;
         this.https();
         http.get('v1/biz/goods',{
@@ -182,6 +187,7 @@
           })
       },
       parfwlists:function (data) {
+        this.parfwlist = '';
         this.parfwlist = data;
         this.https();
       },
@@ -239,7 +245,7 @@
         .catch((error)=>{
            console.log(error)
         })
-      }
+      },
     },
     created(){
       //获取服务类别

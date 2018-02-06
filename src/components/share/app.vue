@@ -4,8 +4,8 @@
       <div class="xqreturn" @click="backHandle"></div>
       <span>下载商标货架APP</span>
     </div>
-    <a href="">
-      <!--<img src="../../assets/images/app.jpg" alt="">-->
+    <a href="javascript:;"  @click="push">
+      <img src="../../assets/images/app.jpg" alt="">
     </a>
   </div>
 </template>
@@ -16,6 +16,9 @@
       backHandle(){
         this.$router.back();
       },
+      push(){
+        this.$buryData('downapp','下载APP引导','App store');
+      }
     },
   }
 </script>
@@ -42,11 +45,8 @@
   a{
     display: block;
     background: #f7f9ff;
-    position: fixed;
-    top:1rem;bottom: 0;
-    right: 0;left: 0;
-    margin: auto;
-    background: url(#{$backimg}app.jpg)no-repeat;
-    background-size: cover;
+    img{
+      width: 100%;
+    }
   }
 </style>

@@ -78,6 +78,7 @@
         this.checkedNames =[];
         this.mininputnumber ='';
         this.maxinputnumber ='';
+        this.$buryData('listscreen','价格筛选','分享名片列表');
       },
       doreset:function () {
         this.checkedNames =[];

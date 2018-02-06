@@ -48,12 +48,14 @@
                 this.$router.push({
                         path: '/'+redirect
                 })
+                 this.$buryData('login','密码登录',redirect);
             })
             .catch((error)=>{
                  $('.tishi #tstext').text(error.response.data.message);
                  $('.tishi').show().delay(1000).fadeOut();
              })
         }
+        this.$buryData('login',this.$route.path,'app');
       }
 
     }

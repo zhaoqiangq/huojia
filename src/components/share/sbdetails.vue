@@ -63,7 +63,9 @@
       },
     },
     created(){
+
       let mpid = this.$route.query.zch;
+      let sblb = this.$route.query.sblb
       //默认获取验证码
       http.get('/v1/biz/trademark/'+mpid+'',{
           params:{
@@ -76,6 +78,10 @@
         .catch((error)=>{
               console.log(error);
         })
+
+      var detail = '商标详情注册号'+mpid+'商标类别'+sblb;
+      this.$buryData('tmview',detail,'');
+
     }
   }
 </script>

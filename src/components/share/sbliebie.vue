@@ -41,6 +41,7 @@
         this.$emit('parsblblist',this.checkedNames.toString());
         this.$emit('hidesbliebie')
         this.checkedNames =[];
+        this.$buryData('listscreen','商标类别筛选','分享名片列表');
       }
     }
   }

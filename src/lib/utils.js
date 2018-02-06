@@ -103,7 +103,7 @@ export default {
        //设备版本
        var device_version = window.navigator.appVersion;
 
-
+        //埋点
        vm.prototype.$buryData = (behavior,fromPage,toPage) => {
          $.post("http://apicet.shsbip.com/api/site/devicelog",{
            action:behavior,
