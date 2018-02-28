@@ -10,7 +10,7 @@
           <input type="text" name="" v-model="LUserPhone" >
         </li>
         <li>
-          <span>密码：</span>
+          <span>密 码：</span>
           <input type="password" name="" v-model="LUserPsd">
         </li>
         <li>

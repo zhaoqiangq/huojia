@@ -5,6 +5,7 @@
   background-size: cover;
   padding: 0 .4rem;
   box-sizing: border-box;
+  position: relative;
   h6{
     font-size: 0.38rem;
     color: #ffffff;
@@ -22,6 +23,16 @@
     color: #fff;
     float: right;
     margin-top: 0.25rem;
+  }
+  #attention{
+      border: 1px solid #fff;
+      display: block;
+      position: absolute;
+      top:0.4rem;right: 0.4rem;
+      margin: auto;
+      color: #fff;
+    padding: 0 0.1rem;
+    border-radius: 0.1rem;
   }
 }
 ul.seachNav{
@@ -111,8 +122,11 @@ ul.list2{
       width: 100%;
       height: 2.3rem;
       overflow: hidden;
+      border: 1px solid #e9ebee;
+      line-height: 2.3rem;
       img{
         width: 100%;
+        vertical-align: middle;
       }
     }
 
@@ -144,6 +158,9 @@ ul.list2{
         width: .3rem;
       }
     }
+    p.first{
+      margin-top: 0.1rem;
+    }
   }
 }
 ul.list3{
@@ -162,9 +179,12 @@ ul.list3{
     .img{
       width: 100%;
       height: 1.6rem;
+      line-height: 1.6rem;
+      border: 1px solid #e9ebee;
       overflow: hidden;
       img{
         width: 100%;
+        vertical-align: middle;
       }
     }
 
@@ -181,6 +201,9 @@ ul.list3{
       img{
         width: .3rem;
       }
+    }
+    p.first{
+      margin-top: 0.1rem;
     }
     span.leibei{
       color: #bcbfc3;
@@ -316,7 +339,18 @@ ul.seachNav{
         margin: auto;
         opacity: 0;
       }
+      input[type="radio"]{
+        width: 100%;height: 100%;
+        position: absolute;
+        top:0;left: 0;
+        margin: auto;
+        opacity: 0;
+      }
       input[type="checkbox"]:checked + label{
+        border: 1px solid #406ff4;
+        color: #406ff4;
+      }
+      input[type="radio"]:checked + label{
         border: 1px solid #406ff4;
         color: #406ff4;
       }
@@ -450,8 +484,8 @@ ul.seachNav{
     margin-bottom: 1.5rem;
     li {
       margin: 0;
-      height: .9rem;
       width: 100%;
+      height: auto;
       float: none;
       &:nth-child(3n) {
         float: none;
@@ -463,11 +497,11 @@ ul.seachNav{
       label {
         display: block;
         width: 100%;
-        height: 100%;
         border-radius: 0.05rem;
         border: none;
-        line-height: .9rem;
+        line-height: .8rem;
         padding-left: .25rem;
+        padding-right: .7rem;
         box-sizing: border-box;
         text-align: left;
         color: #62686f;

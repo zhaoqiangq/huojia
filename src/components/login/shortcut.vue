@@ -11,7 +11,7 @@
             <img v-bind:src="imgcode" alt="" class="imgyzm" @click="imgcodes">
           </li>
           <li>
-            <img src="../../assets/images/logicon02.png"/>
+            <img src="../../assets/images/logicon03.png"/>
             <input type="text" placeholder="请输入短信验证码" v-model="duanxingyz">
             <input type="button" value="获取验证码" v-show="show" @click="getphonecode">
             <div class="daojishi" v-show="!show">{{count}}秒后重新获取</div>

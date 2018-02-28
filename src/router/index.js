@@ -11,7 +11,7 @@ let sbList = (resolve) => {
 let sbDetails = (resolve) => {
   return require.ensure([], () => {
     resolve(require('@/components/share/sbdetails'))
-  }, "sbdetails")
+  },"sbdetails")
 }
 //名片分享详情-服务列表
 let xqfwlist = (resolve) => {
@@ -118,7 +118,10 @@ let router = new Router({
       path: '/shareCard',
       name: 'sbList',
       meta: {
-        title: '分享商标列表'
+        title: '分享商标列表',
+        keepAlive: true,
+        index:1,
+        scrolltops:'',
       },
       // alias: '/index',
       component: sbList
@@ -127,7 +130,9 @@ let router = new Router({
       path: '/sbdetails',
       name:'sbDetails',
       meta: {
-        title: '分享商标详情'
+        title: '分享商标详情',
+        keepAlive: true,
+        index:2,
       },
       component:sbDetails
     },
@@ -135,7 +140,9 @@ let router = new Router({
       path: '/xqfwlist',
       name:'xqfwlist',
       meta: {
-        title: '商标服务列表'
+        title: '商标服务列表',
+        keepAlive: true,
+        index:3,
       },
       component:xqfwlist
     },
@@ -143,7 +150,9 @@ let router = new Router({
       path: '/xqsbzt',
       name:'xqsbzt',
       meta: {
-        title: '商标状态'
+        title: '商标状态',
+        keepAlive: true,
+        index:3,
       },
       component:xqsbzt
     },
@@ -151,7 +160,9 @@ let router = new Router({
       path: '/xqsqrlist',
       name:'xqsqrlist',
       meta: {
-        title: '申请人信息'
+        title: '申请人信息',
+        keepAlive: true,
+        index:3,
       },
       component:xqsqrlist
     },
@@ -224,7 +235,7 @@ router.afterEach((to,from)=>{
   if(to.meta.title){
     window.document.title = to.meta.title
   }else {
-    window.document.title = '商标货架'
+    window.document.title = '尚标货架'
   }
 })
 
@@ -241,6 +252,18 @@ router.beforeEach((to, from, next) => {
   } else {
       next()
   }
+})
+
+//后退不加载数据
+router.beforeEach((to, from, next) => {
+  console.log(to.meta.scrolltops)
+  const toDepth = to.meta.index;
+  const fromDepth = from.meta.index;
+  if (toDepth < fromDepth) {
+    from.meta.keepAlive = false
+    to.meta.keepAlive = true
+  }
+  next()
 })
 
 

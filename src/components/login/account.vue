@@ -12,7 +12,7 @@
     </ul>
     <div class="user_login" @click="Login">登录</div>
     <div class="font">
-      <router-link to="/password" tag="span">忘记密码</router-link>
+      <router-link to="/password" tag="span">忘记密码?</router-link>
        <router-link to="/zhuche" tag="span">立即注册</router-link>
     </div>
     <p>

@@ -11,13 +11,16 @@
           <h6>{{namecarddetail.realname}}</h6>
         <img :src="namecarddetail.user_avatar" alt="">
         <span>{{namecarddetail.card_name}}</span>
+        <router-link to="/app" id="attention">
+          关注
+        </router-link>
       </div>
       <ul class="seachNav">
         <li @click="jiage = !jiage">价格</li>
         <li @click="sbliebie = !sbliebie">商标类别</li>
         <li @click="fuwu = !fuwu">服务类目</li>
       </ul>
-      <ul class="list1" v-if="ysid==1">
+            <ul class="list1" v-if="ysid==1">
         <router-link tag="li" v-for="item,index in sblist" :key="index" :to="{path:'/sbdetails',query:{sblb:item.tm_bigtype,zch:item.reg_num}}">
            <div class="img">
               <img v-bind:src="item.tm_img" alt="">
@@ -34,14 +37,14 @@
             <ul class="list2" v-if="ysid==2">
         <router-link tag="li" v-for="item,index in sblist" :key="index" :to="{path:'/sbdetails',query:{sblb:item.tm_bigtype,zch:item.reg_num}}">
         <div class="img"><img v-bind:src="item.tm_img" alt=""></div>
-          <p><span class="gsname">{{item.apply_name}}</span> <img :src="item.is_auth" alt=""></p>
+          <p class="first"><span class="gsname">{{item.apply_name}}</span> <img :src="item.is_auth" alt=""></p>
           <p><span class="leibei">{{item.tm_bigtype}}{{item.tm_bigtype_name}}</span><i>￥{{parseInt(item.price)}}</i></p>
         </router-link>
       </ul>
-            <ul class="list3" v-if="ysid==3">
+            <ul class="list3" v-if="ysid==3" >
         <router-link tag="li" v-for="item,index in sblist" :key="index"  :to="{path:'/sbdetails',query:{sblb:item.tm_bigtype,zch:item.reg_num}}">
           <div class="img"><img v-bind:src="item.tm_img" alt=""></div>
-          <p><span class="gsname">{{item.apply_name}}</span> <img :src="item.is_auth"  alt=""></p>
+          <p class="first"><span class="gsname">{{item.apply_name}}</span> <img :src="item.is_auth"  alt=""></p>
           <p><span class="leibei">{{item.tm_bigtype}}{{item.tm_bigtype_name}}</span></p>
           <i>￥{{parseInt(item.price)}}</i>
         </router-link>
@@ -56,7 +59,7 @@
             <h6>{{item.tm_name}}</h6>
             <p>商标类别：{{item.tm_bigtype}}  注册号：{{item.reg_num}}</p>
             <p><span>申请人：{{item.apply_name}}</span> <img :src="item.auth_img"  alt=""></p>
-            <p>商标状态：{{item.current_status}}</p>
+            <p >商标状态：{{item.current_status}}</p>
             <p>售价：<i>￥{{parseInt(item.price)}}</i></p>
           </div>
         </router-link>
@@ -64,14 +67,14 @@
             <ul class="list2" v-if="ysid==2">
         <router-link tag="li" v-for="item,index in jiazailist" :key="index" :to="{path:'/sbdetails',query:{sblb:item.tm_bigtype,zch:item.reg_num}}">
           <div class="img"><img v-bind:src="item.tm_img" alt=""></div>
-          <p><span class="gsname">{{item.apply_name}}</span> <img :src="item.is_auth" alt=""></p>
+          <p  class="first"><span class="gsname">{{item.apply_name}}</span> <img :src="item.is_auth" alt=""></p>
           <p><span class="leibei">{{item.tm_bigtype}}{{item.tm_bigtype_name}}</span><i>￥{{parseInt(item.price)}}</i></p>
         </router-link>
       </ul>
             <ul class="list3" v-if="ysid==3">
         <router-link tag="li" v-for="item,index in jiazailist" :key="index"  :to="{path:'/sbdetails',query:{sblb:item.tm_bigtype,zch:item.reg_num}}">
           <div class="img"><img v-bind:src="item.tm_img" alt=""></div>
-          <p><span class="gsname">{{item.apply_name}}</span> <img :src="item.is_auth"  alt=""></p>
+          <p class="first"><span class="gsname">{{item.apply_name}}</span> <img :src="item.is_auth"  alt=""></p>
           <p><span class="leibei">{{item.tm_bigtype}}{{item.tm_bigtype_name}}</span></p>
           <i>￥{{parseInt(item.price)}}</i>
         </router-link>
@@ -274,7 +277,22 @@
         .catch((error)=>{
             console.log(error)
         })
-    }
+    },
+//    记录上次滚动的位置
+    beforeRouteLeave(to,form,next){
+      let scrolltop = this.$refs.myScroller && this.$refs.myScroller.getPosition() && this.$refs.myScroller.getPosition().top;
+      form.meta.scrolltops = scrolltop;
+      next();
+    },
+    //    滚动到上次的位置
+    beforeRouteEnter(to,from,next){
+        next(vm => {
+            setTimeout(function () {
+              vm.$refs.myScroller.scrollTo(0, to.meta.scrolltops, false);
+            },0)//同步转异步操作
+        })
+    },
+
   }
 </script>
 <style lang="scss" scoped>

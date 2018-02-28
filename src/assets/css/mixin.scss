@@ -38,22 +38,22 @@ $borcolor:#e9ebee;
   }
 }
 
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-  color: #c0c3cc; opacity:1;
-}
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #c0c3cc; opacity:1;
+  }
 
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-  color: #c0c3cc;
-  opacity:1;
-}
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #c0c3cc;
+    opacity:1;
+  }
 
-input:-ms-input-placeholder{
-  color:#c0c3cc;opacity:1;
-}
+  input:-ms-input-placeholder{
+    color:#c0c3cc;opacity:1;
+  }
 
-input::-webkit-input-placeholder{
-  color: #c0c3cc;opacity:1;
-}
+  input::-webkit-input-placeholder{
+    color: #c0c3cc;opacity:1;
+  }
 
 input[type=text],input[type=password],input[type=text]:focus, input[type=password]:focus, textarea:focus {
 

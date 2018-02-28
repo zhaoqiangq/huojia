@@ -63,7 +63,6 @@
       },
     },
     created(){
-
       let mpid = this.$route.query.zch;
       let sblb = this.$route.query.sblb
       //默认获取验证码

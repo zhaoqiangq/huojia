@@ -11,15 +11,15 @@
            <p>快速选择</p>
             <ul class="cheboxlist">
               <li>
-                <input type="checkbox" value="0-5000" v-model="checkedNames"/>
+                <input type="radio" value="0-5000" v-model="checkedNames"/>
                 <label for="0-5000">0-5000</label>
               </li>
               <li>
-                <input type="checkbox" value="5000-10000" v-model="checkedNames"/>
+                <input type="radio" value="5000-10000" v-model="checkedNames"/>
                 <label for="5000-10000">5000-10000</label>
               </li>
               <li>
-                <input type="checkbox" value="10000-10000000" v-model="checkedNames"/>
+                <input type="radio" value="10000-10000000" v-model="checkedNames"/>
                 <label for="10000-10000000">10000以上</label>
               </li>
             </ul>
@@ -35,7 +35,9 @@
         </form>
       </div>
       <div class="shade" @click="hidejiage"></div>
+
     </div>
+
 </template>
 <script>
   export default {
@@ -44,6 +46,11 @@
         checkedNames:[],
         mininputnumber:'',
         maxinputnumber:''
+      }
+    },
+    watch:{
+      mininputnumber:function () {
+        this.checkedNames = [];
       }
     },
     methods:{
