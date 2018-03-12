@@ -10,7 +10,6 @@
     </ul>
     <router-view class="conten"></router-view>
   </div>
-
 </template>
 <script>
   export default {

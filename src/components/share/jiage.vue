@@ -1,12 +1,12 @@
 <template>
     <div class="jiage">
       <div>
-        <ul class="seachNav boreder">
+        <ul class="seachNav boreder" v-if="isShow">
           <li class="active" @click="hidejiage">价格</li>
           <li @click="showsbliebie">商标类别</li>
           <li @click="showfuwu">服务类目</li>
         </ul>
-        <form >
+        <form>
         <div class="checkbox">
            <p>快速选择</p>
             <ul class="cheboxlist">
@@ -35,12 +35,11 @@
         </form>
       </div>
       <div class="shade" @click="hidejiage"></div>
-
     </div>
-
 </template>
 <script>
   export default {
+    props:['isShow'],
     data () {
       return {
         checkedNames:[],
@@ -66,7 +65,7 @@
       minnumber:function () {
         return Math.min.apply(Math,this.checkedNames.toString().split('-').toString().split(',').map(s => +s))
       },
-      maxnumber:function () {
+      maxnumber:function (){
         return Math.max.apply(Math,this.checkedNames.toString().split('-').toString().split(',').map(s => +s))
       },
       doSubmit:function () {
@@ -97,4 +96,4 @@
 </script>
 <style lang="scss" scoped>
   @import "../../assets/css/minpian.scss"
-  </style>
+</style>

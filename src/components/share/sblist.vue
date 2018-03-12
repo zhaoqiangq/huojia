@@ -80,7 +80,7 @@
         </router-link>
       </ul>
        </scroller>
-    <jiage v-show="jiage" v-on:parjiage="parjiage" v-on:hidejiage="hidejiage" v-on:showsbliebie="showsbliebie" v-on:showfuwu="showfuwu"></jiage>
+    <jiage v-show="jiage"  :isShow="isShow" v-on:parjiage="parjiage" v-on:hidejiage="hidejiage" v-on:showsbliebie="showsbliebie" v-on:showfuwu="showfuwu"></jiage>
     <sbliebie v-show="sbliebie" v-on:parsblblist="parsblblists" v-on:hidesbliebie="hidesbliebie" :sblblist="sblblist"></sbliebie>
     <fuwu v-show="fuwu" v-on:hidefuwu="hidefuwu"  v-on:parfwlist="parfwlists" :smalltype="smalltype"></fuwu>
     <ul class="buttomNav">
@@ -117,10 +117,11 @@
           parmaxjiage:'',
           parsblblist:'',
           parfwlist:'',
-          mpid:3,
+          mpid:this.$route.query.id,
           pages:1,
           count:'',
-          jiazailist:[]
+          jiazailist:[],
+          isShow:true
       }
     },
     components: {
@@ -261,10 +262,10 @@
         })
 
       http.get('v1/biz/name-card',{
-          params:{
-            id:this.mpid,
-            page:this.pages,
-          }
+            params:{
+              id:this.mpid,
+              page:this.pages,
+            }
       })
         .then((res)=>{
             this.sblblist = res.data.data.bigtype;
@@ -292,7 +293,6 @@
             },0)//同步转异步操作
         })
     },
-
   }
 </script>
 <style lang="scss" scoped>

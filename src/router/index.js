@@ -101,6 +101,44 @@ let null404 = (resolve) => {
   })
 }
 
+
+//买商标
+let file = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/buyRand/file'))
+  })
+}
+
+//-------------------注册商标------------------------//
+let reindex = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/register/reindex'))
+  })
+}
+let relist = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/register/relist'))
+  })
+}
+let report = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/register/report'))
+  })
+}
+//-------------------注册商标------------------------//
+let buyindex = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/buyRand/buyindex'))
+  })
+}
+let buylist = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/buyRand/buylist'))
+  })
+}
+
+
+
 Vue.use(Router)
 
 let router = new Router({
@@ -199,7 +237,7 @@ let router = new Router({
       },
       component:password
     },
-     {
+    {
       path:'/newpassword',
        meta: {
          title: '重新输入密码'
@@ -226,7 +264,53 @@ let router = new Router({
         title: '404'
       },
       component:null404
-    }
+    },
+    {
+      path:'/file',
+      meta: {
+        title: '上传图片'
+      },
+      component:file
+    },
+    //-------注册商标------------//
+    {
+      path:'/reindex',
+      meta: {
+        title: '查询商标',
+        index:0,
+      },
+      component:reindex
+    },
+    {
+      path:'/relist',
+      meta: {
+        title: '查询商标列表',
+        index:1,
+      },
+      component:relist
+    },
+    {
+      path:'/report',
+      meta: {
+        title: '注册成功率'
+      },
+      component:report
+    },
+    //-----买商标----------//
+    {
+      path:'/buyindex',
+      meta: {
+        title: '买商标'
+      },
+      component:buyindex
+    },
+    {
+      path:'/buylist',
+      meta: {
+        title: '买商标列表'
+      },
+      component:buylist
+    },
   ]
 })
 
@@ -235,7 +319,7 @@ router.afterEach((to,from)=>{
   if(to.meta.title){
     window.document.title = to.meta.title
   }else {
-    window.document.title = '尚标货架'
+    window.document.title = '商标名片'
   }
 })
 

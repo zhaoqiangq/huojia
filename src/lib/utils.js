@@ -1,17 +1,17 @@
 export default {
    install: function (vm) {
-   		//验证手机输入格式
-      vm.prototype.$checkLPhone = (phone) =>{
-      		if(phone == ''){
-      		  $('.tishi #tstext').text('请输入手机号');
-            $('.tishi').show().delay(1000).fadeOut();
-        }else if(phone.search(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/)==0){
-              return true;
-        }else{
-            $('.tishi #tstext').text('请输入正确的手机号');
-            $('.tishi').show().delay(1000).fadeOut();
-    	}
-      };
+     //验证手机输入格式
+     vm.prototype.$checkLPhone = (phone) =>{
+       if(phone == ''){
+         $('.tishi #tstext').text('请输入手机号');
+         $('.tishi').show().delay(1000).fadeOut();
+       }else if(phone.search(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/)==0){
+         return true;
+       }else{
+         $('.tishi #tstext').text('请输入正确的手机号');
+         $('.tishi').show().delay(1000).fadeOut();
+       }
+     };
     	// 失焦验证图和密码
 	    vm.prototype.$checkLpicma = (picLyanzhengma) =>{
           if(picLyanzhengma == '') {
@@ -101,7 +101,6 @@ export default {
      }
        //设备版本
        var device_version = window.navigator.appVersion;
-
         //埋点
        vm.prototype.$buryData = (behavior,fromPage,toPage) => {
          $.post("http://apicet.shsbip.com/api/site/devicelog",{

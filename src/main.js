@@ -8,12 +8,14 @@ import Utils from '@/lib/utils'
 import 'jquery'
 import "babel-polyfill"
 import VueScroller from 'vue-scroller'
+import VueClipboard from 'vue-clipboard2'
+
 // import Axios from 'axios'
 // import VueAxios from 'vue-axios'
 // Vue.use(VueAxios,Axios)
-
 Vue.use(Utils)
 Vue.use(VueScroller);
+Vue.use(VueClipboard);
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
