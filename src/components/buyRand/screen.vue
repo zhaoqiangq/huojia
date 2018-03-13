@@ -76,6 +76,7 @@
       sumbit:function () {
         this.$emit('screenMgs',this.checkedNames);
         this.$emit('hidescreen');
+        this.checkedNames=[];
       },
       sbliebie:function () {
         this.$emit('showsbliebie');

@@ -125,7 +125,7 @@ let report = (resolve) => {
     resolve(require('@/components/register/report'))
   })
 }
-//-------------------注册商标------------------------//
+//-------------------买商标------------------------//
 let buyindex = (resolve) => {
   return require.ensure([], () => {
     resolve(require('@/components/buyRand/buyindex'))
@@ -134,6 +134,11 @@ let buyindex = (resolve) => {
 let buylist = (resolve) => {
   return require.ensure([], () => {
     resolve(require('@/components/buyRand/buylist'))
+  })
+}
+let recommend = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/buyRand/recommend'))
   })
 }
 
@@ -300,16 +305,28 @@ let router = new Router({
     {
       path:'/buyindex',
       meta: {
-        title: '买商标'
+        title: '买商标',
+        index:0,
       },
       component:buyindex
     },
     {
       path:'/buylist',
       meta: {
-        title: '买商标列表'
+        title: '买商标列表',
+        index:1,
+        scrolltops:'',
       },
       component:buylist
+    },
+    {
+      path:'/recommend',
+      meta: {
+        title: '买商标列表',
+        index:1,
+        scrolltops:'',
+      },
+      component:recommend
     },
   ]
 })

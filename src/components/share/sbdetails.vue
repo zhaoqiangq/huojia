@@ -3,6 +3,9 @@
       <div class="xqheader">
           <div class="xqreturn" @click="backHandle"></div>
           <span>商标详情</span>
+        <router-link tag="div" class="recommend" v-if="isshow" :to='{path:"/recommend",query:{sblb:details.tm_bigtype}}'>
+          智能推荐
+        </router-link>
       </div>
       <div class="xzimg">
         <img v-bind:src="details.tm_img" alt="">
@@ -34,7 +37,7 @@
           {{details.use_period}}
         </li>
       </ul>
-      <ul class="lxqlist">
+      <ul class="lxqlist " v-bind:class="{active:isshow}">
         <router-link tag="li" class="link" :to='{path:"/xqfwlist",query:{sblb:intCls,zch:zch}}'>
           <span>商标服务列表</span>
         </router-link>
@@ -43,6 +46,10 @@
         </router-link>
         <li><span>代理公司</span><span class="right">{{details.agent}}</span></li>
       </ul>
+      <div class="xqbun" v-if="isshow">
+        <a href="">在线咨询</a>
+        <a href="">立即购买</a>
+      </div>
   </div>
 </template>
 <script>
@@ -53,7 +60,8 @@
       return {
         details:'',
         zch:this.$route.query.zch,
-        intCls:this.$route.query.sblb
+        intCls:this.$route.query.sblb,
+        isshow:this.$route.query.isshow,
       }
     },
     methods:{
@@ -73,6 +81,7 @@
         })
         .then((res)=>{
              this.details=res.data.data;
+             console.log(res);
         })
         .catch((error)=>{
               console.log(error);
