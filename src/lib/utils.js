@@ -116,6 +116,13 @@ export default {
             console.log(res);
          });
        }
+
+       //判断当前浏览器是否为safir
+     // vm.prototype.safir=() =>{
+     // }
+
+
+
    }
 }
 

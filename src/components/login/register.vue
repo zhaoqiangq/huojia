@@ -3,8 +3,9 @@
     <div class="loginHader">
       <div class="retreat" @click="backHandle"></div>
       <img src="../../assets/images/head.png" alt="">
+      <div class="kuaijie" v-show="isaccount">快捷登录</div>
     </div>
-    <ul class="loginNav">
+    <ul class="loginNav" v-show="!isaccount">
       <router-link to="/register" tag="li">快捷登录</router-link>
       <router-link to="/account" tag="li">账号登录</router-link>
     </ul>
@@ -16,13 +17,13 @@
     name: 'register',
     data () {
       return {
-
+        isaccount:this.$route.query.isaccount
       }
     },
     methods:{
       //后退
       backHandle(){
-        this.$router.push('/shareCard');
+        this.$router.back();
       },
     },
   }
@@ -79,5 +80,14 @@
           }
        }
     }
+  }
+  .kuaijie{
+    width: 100%;
+    position: absolute;
+    left: 0;right: 0;bottom: 0.3rem;
+    margin: auto;
+    font-size: .32rem;
+    color: #ffffff;
+    text-align: center;
   }
 </style>

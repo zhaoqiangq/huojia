@@ -142,7 +142,28 @@ let recommend = (resolve) => {
   })
 }
 
+//-------------------卖商标------------------------//
+let sellform = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/sellsb/sellform'))
+  })
+}
 
+let succeedapp = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/sellsb/succeedapp'))
+  })
+}
+let batchissue = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/sellsb/batchissue'))
+  })
+}
+let iissue = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/sellsb/iissue'))
+  })
+}
 
 Vue.use(Router)
 
@@ -327,6 +348,36 @@ let router = new Router({
         scrolltops:'',
       },
       component:recommend
+    },
+    //-----卖商标----------//
+    {
+      path:'/sellform',
+      meta: {
+        title: '发布商标',
+      },
+      component:sellform
+    },
+    {
+      path:'/succeedapp',
+      meta: {
+        title: '下载App',
+      },
+      component:succeedapp
+    },
+    {
+      path:'/batchissue',
+      meta: {
+        title: '批量发布商标',
+      },
+      component:batchissue
+    },
+    {
+      path:'/iissue',
+      meta: {
+        title: '我的发布',
+        index:1,
+      },
+      component:iissue
     },
   ]
 })

@@ -92,10 +92,14 @@
               fast:true
             }))
             .then((res)=>{
-              this.$local.save("shanbiao",res.data.data.access_token)
+              this.$local.save("shanbiao",res.data.data.access_token);
               let redirect = this.$route.query.redirect
               if(!redirect){
                 redirect = 'app'
+              }
+              if(redirect == 'sellform'){
+                this.$router.push({path: '/sellform',query: {istrue:true,registration:this.$route.query.registration,parsblblist:this.$route.query.parsblblist,money:this.$route.query.money,name:this.$route.query.name}});
+                return;
               }
               this.$router.push({
                 path: '/'+redirect
