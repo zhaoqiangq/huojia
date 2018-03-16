@@ -81,10 +81,15 @@ export default {
       sbuuid =  window.localStorage.getItem('sbuuid')
 
       //获取token
-      var token;
-      if (window.localStorage.getItem('shanbiao')){
-        token = window.localStorage.getItem('shanbiao')
-      }
+     let token = window.localStorage.getItem('shanbiao');
+
+     if(token==null){
+       token = ''
+     }else {
+       token = token.replace("\"","").replace("\"","")
+     }
+
+
 
       //获取手机型号和系统
      var iponeModel;
@@ -102,7 +107,7 @@ export default {
        //设备版本
        var device_version = window.navigator.appVersion;
         //埋点
-       vm.prototype.$buryData = (behavior,fromPage,toPage) => {
+       vm.prototype.$buryData = (behavior) => {
          $.post("http://apicet.shsbip.com/api/site/devicelog",{
            action:behavior,
            type:'3',
@@ -110,17 +115,30 @@ export default {
            device_name:iponeModel,
            device_version:device_version,
            token:token,
-           from_page:fromPage,
-           to_page:toPage,
+           from_page:document.referrer,
+           to_page:document.URL,
          },function(res){
             console.log(res);
          });
        }
 
-       //判断当前浏览器是否为safir
-     // vm.prototype.safir=() =>{
-     // }
-
+       //判断当前浏览器是否为safari
+     vm.prototype.$safari = () =>{
+       function myBrowser(){
+         var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+         var isOpera = userAgent.indexOf("Opera") > -1;
+         if (userAgent.indexOf("Chrome") > -1){
+           return "Chrome";
+         }
+         if (userAgent.indexOf("Safari") > -1) {
+           return "Safari";
+         } //判断是否Safari浏览器
+       }
+       var mb = myBrowser();
+       if ("Safari" == mb) {
+         return true;
+       }
+     }
 
 
    }

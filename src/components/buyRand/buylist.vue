@@ -43,8 +43,8 @@
             </div>
           </router-link>
           <div class="e-commerce">
-            <a href="">在线咨询</a>
-            <a href="">立即购买</a>
+            <a href="" @click="consult">在线咨询</a>
+            <a href="" @click="buy">立即购买</a>
           </div>
           <div class="boreder"></div>
         </li>
@@ -273,6 +273,7 @@
       popularity(){
         this.order = this.order == 2 ? 1 : 2;
         this.screenHttp();
+        this.$buryData('popularity');
       },
       //价格筛选
       parjiage:function (data) {
@@ -286,6 +287,7 @@
       newproduct:function () {
         this.order = this.order == 3 ? 4 : 3;
         this.screenHttp();
+        this.$buryData('newproduct');
       },
       //商标数据筛选
       parsblblists:function (data) {
@@ -297,6 +299,14 @@
         this.screenmgs = data;
         this.screenHttp();
       },
+      //在线咨询
+      consult:function () {
+        this.$buryData('consult');
+      },
+      //立即购买
+      buy:function () {
+        this.$buryData('buy');
+      }
     },
     created(){
       //获取服务类别
@@ -309,6 +319,8 @@
         })
       //初始化数据
       this.firstHttp()
+      this.$buryData('searchtype');
+
     },
     // 记录上次滚动的位置
     beforeRouteLeave(to,form,next){

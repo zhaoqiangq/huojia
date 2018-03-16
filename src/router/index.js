@@ -376,6 +376,7 @@ let router = new Router({
       meta: {
         title: '我的发布',
         index:1,
+        login:true
       },
       component:iissue
     },

@@ -77,6 +77,7 @@
         this.$emit('screenMgs',this.checkedNames);
         this.$emit('hidescreen');
         this.checkedNames=[];
+        this.$buryData('Bythetime');
       },
       sbliebie:function () {
         this.$emit('showsbliebie');

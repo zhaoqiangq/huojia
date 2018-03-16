@@ -17,7 +17,7 @@
         this.$router.back();
       },
       push(){
-        this.$buryData('downapp','下载APP引导','App store');
+        this.$buryData('downapp');
       }
     },
   }

@@ -101,10 +101,15 @@
                 this.$router.push({path: '/sellform',query: {istrue:true,registration:this.$route.query.registration,parsblblist:this.$route.query.parsblblist,money:this.$route.query.money,name:this.$route.query.name}});
                 return;
               }
+              if(redirect == 'batchissue'){
+                this.$router.push({path: '/batchissue',query: {vals:this.$route.query.query}});
+                return;
+              }
+
               this.$router.push({
                 path: '/'+redirect
               })
-              this.$buryData('fastlogin','快捷登录',redirect);
+              this.$buryData('fastlogin');
             })
             .catch((error)=>{
               console.log(error)

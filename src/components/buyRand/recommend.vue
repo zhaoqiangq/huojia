@@ -126,6 +126,7 @@
     },
     created(){
       this.firstHttp();
+      this.$buryData('capacity');
     }
   }
 </script>

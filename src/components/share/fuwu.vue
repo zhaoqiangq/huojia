@@ -39,7 +39,7 @@
         this.$emit('parfwlist',this.checkedNames.toString());
         this.$emit('hidefuwu')
         this.checkedNames =[];
-        this.$buryData('listscreen','服务类目筛选','分享名片列表');
+        this.$buryData('serveType');
       }
     }
   }

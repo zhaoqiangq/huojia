@@ -35,8 +35,12 @@
     <sbliebie v-show="sbliebie" v-on:hidesbliebie="hidesbliebie" :sblblist="sblblist" v-on:parsblblist="parsblblists"></sbliebie>
     <div class="fontalert">
         <span>提示：交易由平台担保双方利益执行；交易成功平台将收取20%服务费。</span>
-        <div><img src="../../assets/images/zcicon03.png" alt="">点击此处保存到桌面</div>
+        <div v-if="issafari" @click="safarshows = true"><img src="../../assets/images/zcicon03.png" alt="">点击此处保存到桌面</div>
       </div>
+    <div class="safaris" v-show="safarshows">
+      <div class="shade" @click="safarshows  = false"></div>
+      <div class="imgs"></div>
+    </div>
     <ul class="sellfooter">
       <router-link tag="li"  :to="{path:'/sellform'}">
         <img src="../../assets/images/sellicon04.png" alt="">发布商标
@@ -52,27 +56,29 @@
   </div>
 </template>
 <script>
-  import sbliebie from '@/components/share/sbliebie'
+  import sbliebier from '@/components/share/sbliebier'
   import qs from 'qs'
   import http from '../../config/http'
   export default {
     data(){
         return{
-                  isShow:true,
-                sbliebie:false,
-                sblblist:'',
-             parsblblist:this.$route.query.parsblblist,
-            registration:this.$route.query.registration,
+                  isShow:true,                             //单个/批量  title切换
+                sbliebie:false,                           //是否展示商标分类表
+                sblblist:'',                              //商标类别数据
+             parsblblist:this.$route.query.parsblblist,  //参数：商标类别参数
+            registration:this.$route.query.registration, //参数：注册号参数
                     sbmgs:'',
-                     name:this.$route.query.name,
-                   istrue:this.$route.query.istrue,
-                    money:this.$route.query.money,
-               searchword:'',
-            message:'尚标公众号',
+                     name:this.$route.query.name,         //单个发布：商标名称
+                   istrue:this.$route.query.istrue,       //单个发布：判断是否点击发布
+                    money:this.$route.query.money,        //单个发布：商标价格
+               searchword:'',                             //批量发布：搜索的信息
+                  message:'尚标公众号',                  //复制的公众号名称
+                 issafari:false,                         //判断是否显示点击下载桌面
+               safarshows: false                        //点击弹出引导下载到桌面的流程
           }
       },
     components: {
-      sbliebie:sbliebie
+      sbliebie:sbliebier,
     },
     methods:{
       //隐藏商标分类列表
@@ -104,6 +110,7 @@
             this.sbmgs=res.data.data;
             this.name = res.data.data.tm_name;
             this.istrue = true;
+            this.$buryData('query');
           })
           .catch((error)=>{
             $('.tishi #tstext').text(error.response.data.message);
@@ -138,6 +145,7 @@
                 $('.tishi').show().delay(2000).fadeOut();
               }else if(res.data.data.row==1){
                 this.$router.push({path: '/succeedapp'});
+                this.$buryData('singleIssue');
               }
             })
             .catch((error)=>{
@@ -155,13 +163,14 @@
           this.$router.push({path: '/batchissue',query: {vals: this.searchword}});
         }
       },
+      // 公众号名称复制
       onCopy:function (e) {
         $('.tishi #tstext').text('您已复制微信公众号，请前往微信关注');
         $('.tishi').show().delay(1500).fadeOut();
       },
     },
     created(){
-      //获取服务类别
+      //获取商标类别
       http.get('/v1/biz/cls')
         .then((res) => {
           this.sblblist = res.data.data;
@@ -169,7 +178,12 @@
         .catch((error) => {
           console.log(error)
         })
-    }
+      //判断是否为safari
+      if(this.$safari()){
+          this.issafari = true;
+      }
+
+    },
   }
 </script>
 <style lang="scss" scoped>

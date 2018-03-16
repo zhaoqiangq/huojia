@@ -8,7 +8,7 @@
       <form>
         <ul class="cheboxlist bottom">
           <li v-for="item in sblblist">
-            <input type="checkbox" :value="item.tm_bigtype" v-model="checkedNames">
+            <input type="radio" :value="item.tm_bigtype" v-model="checkedNames">
             <label :for="item.tm_bigtype">{{item.tm_bigtype}}{{item.tm_bigtype_name}}</label>
           </li>
         </ul>
@@ -22,7 +22,6 @@
   </div>
 </template>
 <script>
-
   export default {
     props:['sblblist'],
     data () {

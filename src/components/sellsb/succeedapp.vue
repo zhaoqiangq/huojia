@@ -14,19 +14,36 @@
     </div>
     <a href="" class="xiazai">下载APP</a>
     <ul class="sellfooter">
-      <li><img src="../../assets/images/sellicon04.png" alt="">发布商标</li>
-      <li><img src="../../assets/images/sellicon05.png" alt="">我的发布</li>
-      <li><img src="../../assets/images/sellicon07.png" alt="">关注我们</li>
+      <router-link tag="li"  :to="{path:'/sellform'}">
+        <img src="../../assets/images/sellicon03.png" alt="">发布商标
+      </router-link>
+      <router-link tag="li"  :to="{path:'/iissue'}">
+        <img src="../../assets/images/sellicon05.png" alt="">我的发布
+      </router-link>
+      <li
+        v-clipboard:copy="message"
+        v-clipboard:success="onCopy"
+      ><img src="../../assets/images/sellicon07.png" alt="">微信公众号</li>
     </ul>
   </div>
 </template>
 <script>
   export default {
+      data(){
+        return{
+          message:'尚标公众号',    //微信公众号
+        }
+      },
     methods:{
     //后退
     backHandle(){
       this.$router.back();
     },
+      //关注公众号
+      onCopy:function (e) {
+        $('.tishi #tstext').text('您已复制微信公众号，请前往微信关注');
+        $('.tishi').show().delay(1500).fadeOut();
+      },
     }
   }
 </script>

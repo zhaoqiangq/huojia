@@ -48,7 +48,7 @@
                 this.$router.push({
                         path: '/'+redirect
                 })
-                 this.$buryData('login','密码登录',redirect);
+                 this.$buryData('login');
             })
             .catch((error)=>{
                  $('.tishi #tstext').text(error.response.data.message);

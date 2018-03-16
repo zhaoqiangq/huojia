@@ -7,7 +7,7 @@
     </div>
     <ul class="batlist" v-if="types==2">
       <li v-for="item,index in sblist" >
-        <div class="battop" :class="{active:index==indexs}" @click="isShow(index)">{{item.applicantCn}}，共 <span>{{item.validTmCount}}</span>个</div>
+        <div class="battop" :class="{active:index==indexs}" @click="isShow(index)"> <p>{{item.applicantCn}}</p>，共 <span>{{item.validTmCount}}</span>个</div>
         <ul>
           <li v-for="items,index in item.trademarks" v-if="index < 2">
             <img :src="items.tm_img" alt="">
@@ -63,12 +63,12 @@
   export default {
     data(){
       return{
-        val:this.$route.query.vals,
-        sblist:'',
-        indexs:'-1',
-        types:2,
-        isnull:false,
-        message:'尚标公众号',
+        val:this.$route.query.vals,    //搜索的信息
+        sblist:'',                     //商标数据
+        indexs:'-1',                  //是否申请人名下的数据
+        types:2,                      //判断搜索值   1：注册号 2：申请人
+        isnull:false,                //数据是否为空
+        message:'尚标公众号',        //微信公众号名称
       }
     },
     methods:{
@@ -76,9 +76,11 @@
       backHandle(){
         this.$router.back();
       },
+      //展示申请人名下的数据
       isShow(data){
         this.indexs = this.indexs == data ? '-1':data;
       },
+      //搜索数据共用函数
       sbhttp(){
         var reg = /^[\d]+$/;
         this.types = 2;
@@ -104,24 +106,33 @@
             console.log(error)
           })
       },
+      // 点击搜索
       seche(){
         this.sbhttp();
       },
+      //发布搜索词为申请人的商标
       issuesb(applicantCn,idCardNo){
-        http.post('/v1/biz/trademark-storage?accessToken=',
-          qs.stringify({
-            name:applicantCn,
-            idCard:idCardNo,
-          }))
-          .then((res)=>{
-              if(res.data.code==200){
+        let token = window.localStorage.getItem('shanbiao');
+        if(!token){
+          this.$router.push({path: '/register',query: {isaccount:true,redirect:'batchissue',query:this.val}});
+        }else {
+          http.post('/v1/biz/trademark-storage?accessToken=',
+            qs.stringify({
+              name: applicantCn,
+              idCard: idCardNo,
+            }))
+            .then((res) => {
+              if (res.data.code == 200) {
                 this.$router.push({path: '/succeedapp'});
+                this.$buryData('batchIssue');
               }
-          })
-          .catch((error)=>{
-            console.log(error)
-          })
+            })
+            .catch((error) => {
+              console.log(error)
+            })
+        }
       },
+      //发布搜索词为注册号的商标
       zchfabu(tm_bigtype,reg_num){
         http.get('/v1/biz/library/1',{
           params:{
@@ -138,6 +149,7 @@
               .then((res)=>{
                 if(res.data.code==200){
                   this.$router.push({path: '/succeedapp'});
+                  this.$buryData('batchIssue');
                 }
               })
               .catch((error)=>{
@@ -147,15 +159,19 @@
           .catch((error)=>{
             console.log(error)
           })
+
       },
+      //点击关注公众号
       onCopy:function (e) {
         $('.tishi #tstext').text('您已复制微信公众号，请前往微信关注');
         $('.tishi').show().delay(1500).fadeOut();
       },
     },
     created(){
+        //默认搜索
         this.sbhttp();
-    }
+        this.$buryData('tmview');
+    },
   }
 </script>
 <style lang="scss" scoped>
