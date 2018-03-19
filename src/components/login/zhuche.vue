@@ -91,7 +91,6 @@
                   mobile:this.LUserPhone
                 }))
             .then((res)=>{
-               console.log(res.data)
                 this.getCode();
             })
             .catch((error)=>{
@@ -112,7 +111,6 @@
               validate:this.duanxingyz
             }))
             .then((res)=>{
-              console.log(res);
              this.$local.save("shanbiao",res.data.data.access_token)
               let redirect = this.$route.query.redirect
 

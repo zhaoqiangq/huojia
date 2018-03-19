@@ -22,19 +22,22 @@
 </template>
 <script>
   export default {
-    props:['smalltype'],
+    props:['smalltype'],      //服务类目数据
     data () {
       return {
-        checkedNames:[],
+        checkedNames:[],      //数据筛选数组
       }
     },
     methods:{
+        //关闭服务类目
       hidefuwu: function () {
         this.$emit('hidefuwu')
       },
+      //重置数据
       doreset:function () {
         this.checkedNames = []
       },
+      //提交数据
       doSubmit:function () {
         this.$emit('parfwlist',this.checkedNames.toString());
         this.$emit('hidefuwu')

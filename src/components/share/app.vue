@@ -16,6 +16,7 @@
       backHandle(){
         this.$router.back();
       },
+      //app数据埋点
       push(){
         this.$buryData('downapp');
       }

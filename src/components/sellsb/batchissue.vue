@@ -97,7 +97,6 @@
           .then((res)=>{
             this.isnull =false;
             this.sblist = res.data.data.results;
-            console.log(res);
             if(res.data.data.count==0){
               this.isnull =true;
             }

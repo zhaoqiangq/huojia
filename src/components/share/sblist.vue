@@ -105,23 +105,23 @@
   export default {
     data () {
       return {
-          jiage:false,
-          fuwu:false,
-          sbliebie:false,
-          sblblist:'',
-          sblist:'',
-          ysid:'',
-          smalltype:'',
-          namecarddetail:'',
-          parminjiage:'',
-          parmaxjiage:'',
-          parsblblist:'',
-          parfwlist:'',
-          mpid:this.$route.query.id,
-          pages:1,
-          count:'',
-          jiazailist:[],
-          isShow:true
+          jiage:false,                                          //开关：价格组件
+          fuwu:false,                                         //开关：服务类目
+          sbliebie:false,                                   //开关：商标分类列表
+          sblblist:'',                                     //数据：商标分类列表数据
+          sblist:'',                                      //数据：商标列表数据
+          ysid:'',                                       //数据：商标数据展现方式：1-2-3
+          smalltype:'',                                //数据：服务列表数据
+          namecarddetail:'',                         //数据：用户信息数据
+          parminjiage:'',                          //参数：最小价格
+          parmaxjiage:'',                        //参数：最大价格
+          parsblblist:'',                      //参数：商标分类
+          parfwlist:'',                       //参数：服务类目
+          mpid:this.$route.query.id,             //获取用户id
+          pages:1,                             //参数：page
+          count:'',                          //数据：商标数据总数
+          jiazailist:[],                   //数据：上拉加载数据
+          isShow:true                    //开关：价格组件header开关
       }
     },
     components: {
@@ -130,23 +130,29 @@
       sbliebie:sbliebie,
     },
     methods:{
+        // 关闭价格组件
       hidejiage:function () {
         this.jiage = false;
       },
+      // 关闭服务类目组件
       hidefuwu:function () {
         this.fuwu = false;
       },
+      // 关闭商标分类组件
       hidesbliebie:function () {
         this.sbliebie = false;
       },
+      //显示商标分类组件
       showsbliebie:function () {
         this.sbliebie = true;
         this.jiage = false;
       },
+      //显示服务类目组件
       showfuwu:function () {
         this.fuwu = true;
         this.jiage = false;
       },
+      //公用ajax函数
       https:function () {
             http.get('v1/biz/name-card',{
                 params:{
@@ -167,6 +173,7 @@
                 console.log(error)
             })
       },
+      //价格筛选
       parjiage:function (data) {
         this.parminjiage = '';
         this.parmaxjiage = '';
@@ -174,6 +181,7 @@
         this.parmaxjiage = data.max;
         this.https();
       },
+      //商标分类筛选
       parsblblists:function (data) {
         this.parsblblist = '';
         this.parsblblist = data;
@@ -190,11 +198,13 @@
              console.log(error)
           })
       },
+      //服务类目筛选
       parfwlists:function (data) {
         this.parfwlist = '';
         this.parfwlist = data;
         this.https();
       },
+      //下拉刷新
       refresh() {
         this.parminjiage='';
         this.parmaxjiage='';
@@ -220,6 +230,7 @@
              console.log(error)
          })
       },
+      //上拉加载
       infinite() {
         if (!firstLoaded) {
           this.$refs.myScroller.finishInfinite();
@@ -260,7 +271,7 @@
         .catch((error)=>{
             console.log(error)
         })
-
+      //获取服务类别
       http.get('v1/biz/name-card',{
             params:{
               id:this.mpid,

@@ -42,9 +42,9 @@
     props:['isShow'],
     data () {
       return {
-        checkedNames:[],
-        mininputnumber:'',
-        maxinputnumber:''
+        checkedNames:[],      //价格数据筛选
+        mininputnumber:'',   //最小价格
+        maxinputnumber:''    //最小价格
       }
     },
     watch:{

@@ -165,6 +165,26 @@ let iissue = (resolve) => {
   })
 }
 
+
+//-----------------品牌维权-------------------//
+let brindex = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/industrybrand/brindex'))
+  })
+}
+let brseach = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/industrybrand/brseach'))
+  })
+}
+
+let industryindex = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/industrybrand/industryindex'))
+  })
+}
+
+
 Vue.use(Router)
 
 let router = new Router({
@@ -179,78 +199,41 @@ let router = new Router({
   },
   routes: [
     {
-      path: '/shareCard',
-      name: 'sbList',
-      meta: {
-        title: '分享商标列表',
-        keepAlive: true,
-        index:1,
-        scrolltops:'',
-      },
-      // alias: '/index',
+      path: '/shareCard',name: 'sbList',
+      meta:{title: '分享商标列表',keepAlive: true,index:1,scrolltops:'',},
       component: sbList
     },
     {
-      path: '/sbdetails',
-      name:'sbDetails',
-      meta: {
-        title: '分享商标详情',
-        keepAlive: true,
-        index:2,
-      },
-      component:sbDetails
-    },
+      path: '/sbdetails',name:'sbDetails',
+      meta: {title: '分享商标详情',keepAlive: true,index:2,},
+      component:sbDetails  },
     {
-      path: '/xqfwlist',
-      name:'xqfwlist',
-      meta: {
-        title: '商标服务列表',
-        keepAlive: true,
-        index:3,
-      },
+      path: '/xqfwlist',name:'xqfwlist',
+      meta: {title: '商标服务列表',keepAlive: true,index:3,},
       component:xqfwlist
     },
     {
-      path: '/xqsbzt',
-      name:'xqsbzt',
-      meta: {
-        title: '商标状态',
-        keepAlive: true,
-        index:3,
-      },
+      path: '/xqsbzt',name:'xqsbzt',
+      meta: {title: '商标状态',keepAlive: true,index:3,},
       component:xqsbzt
     },
     {
-      path: '/xqsqrlist',
-      name:'xqsqrlist',
-      meta: {
-        title: '申请人信息',
-        keepAlive: true,
-        index:3,
-      },
+      path: '/xqsqrlist',name:'xqsqrlist',
+      meta: {title: '申请人信息',keepAlive: true,index:3,},
       component:xqsqrlist
     },
     {
-      path: '/app',
-      name:'app',
-      meta: {
-        title: '下载商标货架app',
-        login:true
-      },
+      path: '/app',name:'app',
+      meta: {title: '下载商标货架app',login:true},
       component:app
     },
     {
-      path: '/guide',
-      name:'guide',
-      meta: {
-        title: '新手引导',
-      },
+      path: '/guide',name:'guide',
+      meta: {title: '新手引导', },
       component:guide
     },
     {
-      path:'/register',
-      name:'register',
-      component:register,
+      path:'/register',name:'register',component:register,
       children:[
         {path:'/register',meta: {title: '快捷登录'},component:shortcut},
         {path:'/account',meta: {title: '账号登录'},component:account},
@@ -258,127 +241,102 @@ let router = new Router({
     },
     {
       path:'/password',
-      meta: {
-        title: '忘记密码'
-      },
+      meta: {title: '忘记密码'},
       component:password
     },
     {
       path:'/newpassword',
-       meta: {
-         title: '重新输入密码'
-       },
+      meta: {title: '重新输入密码'},
       component:newpassword
     },
     {
       path:'/zhuche',
-      meta: {
-        title: '注册账号'
-      },
+      meta: {title: '注册账号'},
       component:zhuche
     },
     {
       path:'/userxy',
-      meta: {
-        title: '用户服务协议'
-      },
+      meta: {title: '用户服务协议'},
       component:userxy
     },
     {
       path:'*',
-      meta: {
-        title: '404'
-      },
+      meta: {title: '404'},
       component:null404
     },
     {
       path:'/file',
-      meta: {
-        title: '上传图片'
-      },
+      meta: {title: '上传图片'},
       component:file
     },
     //-------注册商标------------//
     {
       path:'/reindex',
-      meta: {
-        title: '查询商标',
-        index:0,
-      },
+      meta: {title: '查询商标',index:0,},
       component:reindex
     },
     {
       path:'/relist',
-      meta: {
-        title: '查询商标列表',
-        index:1,
-      },
+      meta: {title: '查询商标列表',index:1,},
       component:relist
     },
     {
       path:'/report',
-      meta: {
-        title: '注册成功率'
-      },
+      meta: {title: '注册成功率'},
       component:report
     },
     //-----买商标----------//
     {
       path:'/buyindex',
-      meta: {
-        title: '买商标',
-        index:0,
-      },
+      meta: {title: '买商标',index:0,},
       component:buyindex
     },
     {
       path:'/buylist',
-      meta: {
-        title: '买商标列表',
-        index:1,
-        scrolltops:'',
-      },
+      meta: {title: '买商标列表',index:1,scrolltops:'', },
       component:buylist
     },
     {
       path:'/recommend',
-      meta: {
-        title: '买商标列表',
-        index:1,
-        scrolltops:'',
-      },
+      meta: {title: '买商标列表',index:1,scrolltops:'',},
       component:recommend
     },
     //-----卖商标----------//
     {
       path:'/sellform',
-      meta: {
-        title: '发布商标',
-      },
+      meta: {title: '发布商标',},
       component:sellform
     },
     {
       path:'/succeedapp',
-      meta: {
-        title: '下载App',
-      },
+      meta: {title: '下载App',},
       component:succeedapp
     },
     {
       path:'/batchissue',
-      meta: {
-        title: '批量发布商标',
-      },
+      meta: {title: '批量发布商标',},
       component:batchissue
     },
     {
       path:'/iissue',
-      meta: {
-        title: '我的发布',
-        index:1,
-        login:true
-      },
+      meta: {title: '我的发布',index:1,login:true},
       component:iissue
+    },
+    //-----品牌维权----------//
+    {
+      path:'/brindex',
+      meta: {title: '品牌维权',},
+      component:brindex
+    },
+    {
+      path:'/brseach',
+      meta: {title: '品牌维权',},
+      component:brseach
+    },
+    {
+      path:'/industryindex',
+      meta: {title: '行业情报',},
+      component:industryindex
     },
   ]
 })

@@ -9,17 +9,24 @@
           </div>
         </div>
      </div>
-    <div class="desktop">
+    <div class="desktop" v-if="issafari"  @click="safarshows = true">
       <img src="../../assets/images/zcicon03.png" alt="">
       <span>点击此处保存到桌面</span>
     </div>
+    <div class="safaris" v-show="safarshows">
+      <div class="shade" @click="safarshows  = false"></div>
+      <div class="imgs"></div>
+    </div>
+
   </div>
 </template>
 <script >
   export default{
       data(){
         return{
-          val:''
+          val:'',
+          issafari:false,
+          safarshows:false
         }
       },
     methods:{
@@ -30,6 +37,11 @@
           }else {
             this.$router.push({path: '/relist',query: {vals: this.val}});
           }
+      }
+    },
+    created(){
+      if(this.$safari()){
+        this.issafari = true;
       }
     }
   }

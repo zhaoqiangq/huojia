@@ -73,7 +73,6 @@
                   mobile:this.LUserPhone
                 }))
             .then((res)=>{
-               console.log(res.data)
                 this.getCode();
             })
             .catch((error)=>{
@@ -134,8 +133,6 @@
         .catch((error)=>{
             console.log(error)
         })
-          console.log();
-
     }
   }
 </script>

@@ -84,7 +84,6 @@
               this.jiazailist = [];
               this.$refs.myScroller.finishPullToRefresh();
               firstLoaded = true;
-              console.log(res);
             }
           })
           .catch((error)=>{

@@ -112,7 +112,6 @@
                 this.jiazailist = this.jiazailist.concat(datalist)
                 this.$refs.myScroller.finishInfinite();
               }
-              console.log(res);
             })
             .catch((error)=>{
               console.log(error)

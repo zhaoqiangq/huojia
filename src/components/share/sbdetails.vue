@@ -81,7 +81,6 @@
         })
         .then((res)=>{
              this.details=res.data.data;
-             console.log(res);
         })
         .catch((error)=>{
               console.log(error);
