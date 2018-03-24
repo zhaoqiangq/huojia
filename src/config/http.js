@@ -9,13 +9,12 @@ if(token==null){
 }else {
   token = token.replace("\"","").replace("\"","")
 }
-
 var HTTP = axios.create({
   baseURL:'http://apicet.shsbip.com/api',
   responseType:'json',
   headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'accessToken':token
+            'accessToken': token
           }
 })
 

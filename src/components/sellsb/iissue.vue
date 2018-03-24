@@ -7,6 +7,7 @@
         :on-refresh="refresh"
         :on-infinite="infinite"
         snappingHeight="60"
+        style="top:1rem"
       >
         <ul class="sblist">
             <router-link tag="li"v-for="item in sblist" :to="{path:'/sbdetails',query:{sblb:item.tm_bigtype,zch:item.reg_num}}">
@@ -32,7 +33,7 @@
         </ul>
       </scroller>
       <div class="advertising" v-show="imgshow">
-         <a href=""></a>
+         <a :href="href"></a>
         <div @click="close"></div>
       </div>
       <ul class="sellfooter">
@@ -42,10 +43,13 @@
         <router-link tag="li"  :to="{path:'/iissue'}">
           <img src="../../assets/images/sellicon06.png" alt="">我的发布
         </router-link>
-        <li
-          v-clipboard:copy="message"
-          v-clipboard:success="onCopy"
+        <li @click="ishref = !ishref"
         ><img src="../../assets/images/sellicon07.png" alt="">微信公众号</li>
+      </ul>
+      <ul class="footlist" v-if="ishref">
+        <li   v-clipboard:copy="message"
+              v-clipboard:success="onCopy">微信公众号</li>
+        <li><a :href="href">下载APP</a></li>
       </ul>
     </div>
   </template>
@@ -58,9 +62,11 @@
           return{
               sblist:'',               //我的发布数据
             imgshow:true,             //开关：是否关闭是否下载APP广告
-            message:'尚标公众号',    //微信公众号
+            message:this.$wx(),   //微信公众号
             pages:1,                  //请求的页数
-            jiazailist:[]             //后加载的数据
+            jiazailist:[],             //后加载的数据
+            href:'',
+            ishref:false
           }
         },
       methods:{
@@ -124,9 +130,17 @@
         },
       },
         created(){
-            this.pages = 1;
+          this.pages = 1;
           this.https()
           this.$buryData('Iissue');
+          http.get('/v1/biz/version/1',{
+          })
+            .then((res)=>{
+              this.href = res.data.data.url;
+            })
+            .catch((error)=>{
+              console.log(error);
+            })
         },
     }
   </script>

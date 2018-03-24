@@ -48,10 +48,12 @@
       <router-link tag="li"  :to="{path:'/iissue'}">
         <img src="../../assets/images/sellicon05.png" alt="">我的发布
       </router-link>
-      <li
-        v-clipboard:copy="message"
-        v-clipboard:success="onCopy"
-      ><img src="../../assets/images/sellicon07.png" alt="">微信公众号</li>
+      <li @click="ishref = !ishref"><img src="../../assets/images/sellicon07.png" alt="">关注我们</li>
+    </ul>
+    <ul class="footlist" v-if="ishref">
+      <li   v-clipboard:copy="message"
+            v-clipboard:success="onCopy">微信公众号</li>
+      <li><a :href="href">下载APP</a></li>
     </ul>
   </div>
 </template>
@@ -72,10 +74,12 @@
                    istrue:this.$route.query.istrue,       //单个发布：判断是否点击发布
                     money:this.$route.query.money,        //单个发布：商标价格
                searchword:'',                             //批量发布：搜索的信息
-                  message:'尚标公众号',                  //复制的公众号名称
+                  message:this.$wx(),               //复制的公众号名称
                  issafari:false,                         //判断是否显示点击下载桌面
-               safarshows: false                        //点击弹出引导下载到桌面的流程
-          }
+               safarshows: false,                        //点击弹出引导下载到桌面的流程
+              href:'',
+              ishref:false,
+        }
       },
     components: {
       sbliebie:sbliebier,
@@ -121,11 +125,6 @@
       submit:function () {
         if(!this.istrue){
           $('.tishi #tstext').text('请查询商标可否发布');
-          $('.tishi').show().delay(2000).fadeOut();
-          return;
-        }
-        if(!this.money){
-          $('.tishi #tstext').text('请输入商标价格');
           $('.tishi').show().delay(2000).fadeOut();
           return;
         }
@@ -182,6 +181,14 @@
       if(this.$safari()){
           this.issafari = true;
       }
+      http.get('/v1/biz/version/1',{
+      })
+        .then((res)=>{
+          this.href = res.data.data.url;
+        })
+        .catch((error)=>{
+          console.log(error);
+        })
 
     },
   }

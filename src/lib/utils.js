@@ -89,8 +89,6 @@ export default {
        token = token.replace("\"","").replace("\"","")
      }
 
-
-
       //获取手机型号和系统
      var iponeModel;
      var u = navigator.userAgent;
@@ -140,6 +138,25 @@ export default {
        }
      }
 
+     //录入CRM系统信息
+     vm.prototype.$crm = (utel,sbname,uname) => {
+       $.post("http://apicet.shsbip.com/api/v1/tool/phone",{
+         utel:utel,
+         sbname:sbname,
+         uname:uname,
+         froms:'1',
+         urlx:document.URL,
+         cip:'',
+       },function(res){
+         console.log(res);
+       });
+     }
+
+     //微信号
+
+     vm.prototype.$wx = (message) =>{
+       return '标架'
+     }
 
    }
 }

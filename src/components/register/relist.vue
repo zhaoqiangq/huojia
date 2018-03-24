@@ -135,6 +135,7 @@
       :on-refresh="refresh"
       :on-infinite="infinite"
       snappingHeight="60"
+      style="top:2rem"
     >
     <ul class="sblist">
       <li>

@@ -8,7 +8,7 @@
       snappingHeight="60"
     >
       <div class="mphader">
-          <h6>{{namecarddetail.realname}}</h6>
+          <h6>{{namecarddetail.realname}} &nbsp; </h6>
         <img :src="namecarddetail.user_avatar" alt="">
         <span>{{namecarddetail.card_name}}</span>
         <router-link to="/app" id="attention">
@@ -37,14 +37,14 @@
             <ul class="list2" v-if="ysid==2">
         <router-link tag="li" v-for="item,index in sblist" :key="index" :to="{path:'/sbdetails',query:{sblb:item.tm_bigtype,zch:item.reg_num}}">
         <div class="img"><img v-bind:src="item.tm_img" alt=""></div>
-          <p class="first"><span class="gsname">{{item.apply_name}}</span> <img :src="item.is_auth" alt=""></p>
+          <p class="first"><span class="gsname">{{item.apply_name}}</span> <img :src="item.auth_img" alt=""></p>
           <p><span class="leibei">{{item.tm_bigtype}}{{item.tm_bigtype_name}}</span><i>￥{{parseInt(item.price)}}</i></p>
         </router-link>
       </ul>
             <ul class="list3" v-if="ysid==3" >
         <router-link tag="li" v-for="item,index in sblist" :key="index"  :to="{path:'/sbdetails',query:{sblb:item.tm_bigtype,zch:item.reg_num}}">
           <div class="img"><img v-bind:src="item.tm_img" alt=""></div>
-          <p class="first"><span class="gsname">{{item.apply_name}}</span> <img :src="item.is_auth"  alt=""></p>
+          <p class="first"><span class="gsname">{{item.apply_name}}</span> <img :src="item.auth_img"  alt=""></p>
           <p><span class="leibei">{{item.tm_bigtype}}{{item.tm_bigtype_name}}</span></p>
           <i>￥{{parseInt(item.price)}}</i>
         </router-link>
@@ -67,14 +67,14 @@
             <ul class="list2" v-if="ysid==2">
         <router-link tag="li" v-for="item,index in jiazailist" :key="index" :to="{path:'/sbdetails',query:{sblb:item.tm_bigtype,zch:item.reg_num}}">
           <div class="img"><img v-bind:src="item.tm_img" alt=""></div>
-          <p  class="first"><span class="gsname">{{item.apply_name}}</span> <img :src="item.is_auth" alt=""></p>
+          <p  class="first"><span class="gsname">{{item.apply_name}}</span> <img :src="item.auth_img" alt=""></p>
           <p><span class="leibei">{{item.tm_bigtype}}{{item.tm_bigtype_name}}</span><i>￥{{parseInt(item.price)}}</i></p>
         </router-link>
       </ul>
             <ul class="list3" v-if="ysid==3">
         <router-link tag="li" v-for="item,index in jiazailist" :key="index"  :to="{path:'/sbdetails',query:{sblb:item.tm_bigtype,zch:item.reg_num}}">
           <div class="img"><img v-bind:src="item.tm_img" alt=""></div>
-          <p class="first"><span class="gsname">{{item.apply_name}}</span> <img :src="item.is_auth"  alt=""></p>
+          <p class="first"><span class="gsname">{{item.apply_name}}</span> <img :src="item.auth_img"  alt=""></p>
           <p><span class="leibei">{{item.tm_bigtype}}{{item.tm_bigtype_name}}</span></p>
           <i>￥{{parseInt(item.price)}}</i>
         </router-link>

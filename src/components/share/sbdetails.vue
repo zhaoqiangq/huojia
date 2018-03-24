@@ -87,6 +87,7 @@
         })
 
       var detail = '商标详情注册号'+mpid+'商标类别'+sblb;
+
       this.$buryData('tmview');
     },
   }

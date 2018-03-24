@@ -62,18 +62,20 @@
         v-clipboard:copy="message"
         v-clipboard:success="onCopy"
       >微信公众号</li>
-      <li><a href="">下载APP</a></li>
+      <li><a :href="href">下载APP</a></li>
     </ul>
   </div>
 </template>
 <script>
+  import http from '../../config/http'
   import echarts from 'echarts'
   export default {
     name: '',
     data () {
       return {
         isShow:false,
-        message:'尚标公众号',
+        message:this.$wx(),
+        href:'',
         number:[10, 52, 200, 334, 390, 330, 1220],
         strong:['01类化学原料', '01类化学原料', '01类化学原料', '01类化学原料', '01类化学原料', '01类化学原料', '02类化学原料'],
       }
@@ -134,6 +136,16 @@
       backHandle(){
         this.$router.back();
       },
+    },
+    created(){
+      http.get('/v1/biz/version/1',{
+      })
+        .then((res)=>{
+          this.href = res.data.data.url;
+        })
+        .catch((error)=>{
+          console.log(error);
+        })
     },
     //调用
     mounted(){

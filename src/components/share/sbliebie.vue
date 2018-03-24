@@ -14,7 +14,7 @@
         </ul>
         <div class="btn">
           <input type="button" value="确定" @click="doSubmit">
-          <input type="reset" @click="doreset">
+          <input type="reset" @click="doreset" value="重置">
         </div>
       </form>
     </div>

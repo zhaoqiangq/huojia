@@ -94,6 +94,13 @@ let userxy = (resolve) => {
   })
 }
 
+//消息公告
+let notice = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/login/notice'))
+  })
+}
+
 //404
 let null404 = (resolve) => {
   return require.ensure([], () => {
@@ -184,6 +191,12 @@ let industryindex = (resolve) => {
   })
 }
 
+let indseach = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/components/industrybrand/indseach'))
+  })
+}
+
 
 Vue.use(Router)
 
@@ -265,6 +278,11 @@ let router = new Router({
       component:null404
     },
     {
+      path:'/notice',
+      meta: {title: '公告消息'},
+      component:notice
+    },
+    {
       path:'/file',
       meta: {title: '上传图片'},
       component:file
@@ -272,12 +290,12 @@ let router = new Router({
     //-------注册商标------------//
     {
       path:'/reindex',
-      meta: {title: '查询商标',index:0,},
+      meta: {title: '注册商标',index:0,},
       component:reindex
     },
     {
       path:'/relist',
-      meta: {title: '查询商标列表',index:1,},
+      meta: {title: '商标列表',index:1,},
       component:relist
     },
     {
@@ -293,18 +311,18 @@ let router = new Router({
     },
     {
       path:'/buylist',
-      meta: {title: '买商标列表',index:1,scrolltops:'', },
+      meta: {title: '商标列表',index:1,scrolltops:'', },
       component:buylist
     },
     {
       path:'/recommend',
-      meta: {title: '买商标列表',index:1,scrolltops:'',},
+      meta: {title: '商标列表',index:1,scrolltops:'',},
       component:recommend
     },
     //-----卖商标----------//
     {
       path:'/sellform',
-      meta: {title: '发布商标',},
+      meta: {title: '卖商标',},
       component:sellform
     },
     {
@@ -314,29 +332,34 @@ let router = new Router({
     },
     {
       path:'/batchissue',
-      meta: {title: '批量发布商标',},
+      meta: {title: '卖商标',},
       component:batchissue
     },
     {
       path:'/iissue',
-      meta: {title: '我的发布',index:1,login:true},
+      meta: {title: '我的发布',login:true},
       component:iissue
     },
     //-----品牌维权----------//
     {
       path:'/brindex',
-      meta: {title: '品牌维权',},
+      meta: {title: '品牌维权首页',},
       component:brindex
     },
     {
       path:'/brseach',
-      meta: {title: '品牌维权',},
+      meta: {title: '品牌维权详情',},
       component:brseach
     },
     {
       path:'/industryindex',
-      meta: {title: '行业情报',},
+      meta: {title: '行业情报首页',},
       component:industryindex
+    },
+    {
+      path:'/indseach',
+      meta: {title: '行业情报详情',},
+      component:indseach
     },
   ]
 })
@@ -365,7 +388,7 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-//后退不加载数据
+// //后退不加载数据
 router.beforeEach((to, from, next) => {
   console.log(to.meta.scrolltops)
   const toDepth = to.meta.index;
@@ -376,6 +399,5 @@ router.beforeEach((to, from, next) => {
   }
   next()
 })
-
 
 export default router;

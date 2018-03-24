@@ -4,13 +4,19 @@
       <div class="xqreturn" @click="backHandle"></div>
       <span>下载商标货架APP</span>
     </div>
-    <a href="javascript:;"  @click="push">
+    <a :href="href"  @click="push">
       <img src="../../assets/images/app.jpg" alt="">
     </a>
   </div>
 </template>
 <script>
+  import http from '../../config/http'
   export default{
+    data(){
+       return{
+          href :''
+       }
+    },
     methods:{
       //后退
       backHandle(){
@@ -21,6 +27,16 @@
         this.$buryData('downapp');
       }
     },
+    created(){
+      http.get('/v1/biz/version/1',{
+      })
+        .then((res)=>{
+          this.href = res.data.data.url;
+        })
+        .catch((error)=>{
+          console.log(error);
+        })
+    }
   }
 </script>
 <style lang="scss" scoped>

@@ -45,15 +45,18 @@
     </div>
     <ul class="sellfooter">
       <router-link tag="li"  :to="{path:'/sellform'}">
-        <img src="../../assets/images/sellicon03.png" alt="">发布商标
+        <img src="../../assets/images/sellicon04.png" alt="">发布商标
       </router-link>
       <router-link tag="li"  :to="{path:'/iissue'}">
-        <img src="../../assets/images/sellicon06.png" alt="">我的发布
+        <img src="../../assets/images/sellicon05.png" alt="">我的发布
       </router-link>
-      <li
-        v-clipboard:copy="message"
-        v-clipboard:success="onCopy"
-      ><img src="../../assets/images/sellicon07.png" alt="">微信公众号</li>
+      <li @click="ishref = !ishref"
+      ><img src="../../assets/images/sellicon07.png" alt="">关注我们</li>
+    </ul>
+    <ul class="footlist" v-if="ishref">
+      <li   v-clipboard:copy="message"
+            v-clipboard:success="onCopy">微信公众号</li>
+      <li><a :href="href">下载APP</a></li>
     </ul>
   </div>
 </template>
@@ -68,7 +71,9 @@
         indexs:'-1',                  //是否申请人名下的数据
         types:2,                      //判断搜索值   1：注册号 2：申请人
         isnull:false,                //数据是否为空
-        message:'尚标公众号',        //微信公众号名称
+        message:this.$wx(),        //微信公众号名称
+        ishref:false,
+        href:''
       }
     },
     methods:{
@@ -170,6 +175,14 @@
         //默认搜索
         this.sbhttp();
         this.$buryData('tmview');
+      http.get('/v1/biz/version/1',{
+      })
+        .then((res)=>{
+          this.href = res.data.data.url;
+        })
+        .catch((error)=>{
+          console.log(error);
+        })
     },
   }
 </script>

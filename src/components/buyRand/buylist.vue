@@ -30,6 +30,7 @@
         :on-infinite="infinite"
         snappingHeight="60"
         v-show="scrisShow"
+        style="top:2rem"
       >
       <ul class="sblist">
          <li v-for="item,index in sblist" :key="index">
@@ -38,7 +39,7 @@
             <div class="font">
               <h6>{{item.tm_name}} </h6>
               <p>第{{item.tm_bigtype}}类：{{item.tm_bigtype_name}}</p>
-              <p><span v-for="item in item.tm_type">{{item.goodsName}}</span></p>
+              <p><span v-for="item in item.tm_type">{{item.goodsName}}、</span></p>
               <p>售价：<i>￥{{item.price}}</i></p>
             </div>
           </router-link>
@@ -73,7 +74,7 @@
         暂无相关数据
       </div>
       <ul class="butfooter">
-        <li><a href=""><img src="../../assets/images/buyicon03.png" alt="">下载APP</a></li>
+        <li><a :href="href"><img src="../../assets/images/buyicon03.png" alt="">下载APP</a></li>
         <li v-clipboard:copy="message"
             v-clipboard:success="onCopy">
         <img src="../../assets/images/buyicon04.png"  alt="">
@@ -100,7 +101,7 @@
         screenmgs:'',              //参数：下证时间
         order:'',                 //参数：排序
         isActive:false,                  //事件：点击选择搜索类型
-        message:'尚标公众号',          //复制：公众号复制
+        message:this.$wx(),          //复制：公众号复制
         isShow:false,                //配置：默认不显示价格组件的nav
         sbliebie:false,                   //组件：商标分类
         sblblist:'',                    //组件：45类分类表
@@ -109,6 +110,7 @@
         sblist:[],               //数据：第一批数据
         jiazailist:[],         //数据：上拉加载的数据
         scrisShow:true,      //null:  无数据显示
+        href:''
       }
     },
     components: {
@@ -295,6 +297,7 @@
       //下证时间筛选
       screenMgs:function (data) {
         this.type='按商标名称';
+        this.val='';
         this.screenmgs = data;
         this.screenHttp();
       },
@@ -317,8 +320,16 @@
           console.log(error)
         })
       //初始化数据
-      this.firstHttp()
+      this.firstHttp();
       this.$buryData('searchtype');
+      http.get('/v1/biz/version/1',{
+      })
+        .then((res)=>{
+          this.href = res.data.data.url;
+        })
+        .catch((error)=>{
+          console.log(error);
+        })
 
     },
     // 记录上次滚动的位置

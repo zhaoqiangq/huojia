@@ -10,6 +10,7 @@
       :on-infinite="infinite"
       snappingHeight="60"
       v-show="scrisShow"
+      style="top:1rem"
     >
       <ul class="sblist">
         <li v-for="item,index in sblist" :key="index">

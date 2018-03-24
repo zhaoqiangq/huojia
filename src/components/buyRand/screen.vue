@@ -10,51 +10,51 @@
     <form action="">
       <ul class="timenav">
         <li>
-          <input type="radio" name="tiem" v-model="checkedNames" value="不限">
+          <input type="radio" name="tiem" v-model="checkedNames" value="">
           <label for="">
             不限
           </label>
         </li>
         <li>
-          <input type="radio" name="tiem" v-model="checkedNames" value="满1年">
+          <input type="radio" name="tiem" v-model="checkedNames" value="1">
           <label for="">
             满1年
           </label>
         </li>
         <li>
-          <input type="radio" name="tiem" v-model="checkedNames" value="满2年">
+          <input type="radio" name="tiem" v-model="checkedNames" value="2">
           <label for="">
             满2年
           </label>
         </li>
         <li>
-          <input type="radio" name="tiem" v-model="checkedNames" value="满3年">
+          <input type="radio" name="tiem" v-model="checkedNames" value="3">
           <label for="">
             满3年
           </label>
         </li>
         <li>
-          <input type="radio" name="tiem" v-model="checkedNames" value="满4年">
+          <input type="radio" name="tiem" v-model="checkedNames" value="4">
           <label for="">
             满4年
           </label>
         </li>
         <li>
-          <input type="radio" name="tiem" v-model="checkedNames" value="满5年">
+          <input type="radio" name="tiem" v-model="checkedNames" value="5">
           <label for="">
             满5年
           </label>
         </li>
         <li>
-          <input type="radio" name="tiem" v-model="checkedNames" value="满5年以上">
+          <input type="radio" name="tiem" v-model="checkedNames" value="5">
           <label for="">
             满5年以上
           </label>
         </li>
       </ul>
       <div class="foorbtn">
-        <input type="reset" value="重置" @click="reset">
         <input type="button" value="确认" @click="sumbit">
+        <input type="reset" value="重置" @click="reset">
       </div>
     </form>
   </div>
