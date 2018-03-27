@@ -11,7 +11,7 @@
       </ul>
       <div class="search">
         <div class="position">
-          <input type="text" v-model="val" placeholder="请输入商标名称">
+          <input type="text" v-model="val" placeholder="请输入商品名称">
           <div class="button" @click="path">搜索</div>
         </div>
       </div>

@@ -164,7 +164,6 @@
       //筛选数据
       screenHttp(){
         this.pages = 1;
-        this.scrisShow = true;
         var typenumber;
         if(this.type=="按行业产品"){
           typenumber = 2
@@ -189,6 +188,7 @@
               this.scrisShow = false
             }else {
               this.sblist = res.data.data.data;
+              this.scrisShow = true;
               this.jiazailist = [];
               firstLoaded = true;
             }

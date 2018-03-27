@@ -92,6 +92,7 @@
             }))
             .then((res)=>{
               this.$local.save("shanbiao",res.data.data.access_token);
+              http.defaults.headers.accessToken = res.data.data.access_token;
               let redirect = this.$route.query.redirect
               if(!redirect){
                 redirect = 'app'

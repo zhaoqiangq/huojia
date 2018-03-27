@@ -45,12 +45,6 @@
             满5年
           </label>
         </li>
-        <li>
-          <input type="radio" name="tiem" v-model="checkedNames" value="5">
-          <label for="">
-            满5年以上
-          </label>
-        </li>
       </ul>
       <div class="foorbtn">
         <input type="button" value="确认" @click="sumbit">

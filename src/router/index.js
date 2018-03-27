@@ -369,7 +369,7 @@ router.afterEach((to,from)=>{
   if(to.meta.title){
     window.document.title = to.meta.title
   }else {
-    window.document.title = '商标名片'
+    window.document.title = '标价'
   }
 })
 

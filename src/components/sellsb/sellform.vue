@@ -41,6 +41,7 @@
       <div class="shade" @click="safarshows  = false"></div>
       <div class="imgs"></div>
     </div>
+    {{screenWidth}}
     <ul class="sellfooter">
       <router-link tag="li"  :to="{path:'/sellform'}">
         <img src="../../assets/images/sellicon04.png" alt="">发布商标
@@ -79,6 +80,7 @@
                safarshows: false,                        //点击弹出引导下载到桌面的流程
               href:'',
               ishref:false,
+             screenWidth: $(window).height()
         }
       },
     components: {
@@ -167,6 +169,7 @@
         $('.tishi #tstext').text('您已复制微信公众号，请前往微信关注');
         $('.tishi').show().delay(1500).fadeOut();
       },
+
     },
     created(){
       //获取商标类别
